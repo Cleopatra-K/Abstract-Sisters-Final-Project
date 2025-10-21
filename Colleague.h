@@ -13,7 +13,7 @@ protected:
     Mediator* mediator;
 public:
     Colleague(Mediator* med) : mediator(med) {}
-    virtual ~Colleague() = default;
+    virtual ~Colleague();
 
     virtual void receiveMessage(const std::string& message) = 0;
     virtual void sendMessage(const std::string& message);
