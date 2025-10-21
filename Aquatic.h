@@ -13,9 +13,9 @@ Possible subtypes (categories) of plant factories.
  * These plants are like the fish of the plant world - they need water to survive.
  * Examples: Water Lilies, Lotus, Seaweed
  */
-class AquaticPlant : public PlantType {
+class Aquatic: public PlantType {
 public:
-    AquaticPlant(const std::string& n, double p, const std::string& desc);
+    Aquatic(const std::string& n, double p, const std::string& desc);
     virtual PlantType* clone() const override = 0;
     std::string getCategory() const override;
     void display() const override;

@@ -1,20 +1,20 @@
 /**
- * @file Mangrove.h
+ * @file WaterLily.h
  * @brief Inherited from PlantType
  *
 */
-#ifndef MANGROVE_H
-#define MANGROVE_H
+#ifndef WATERLILY_H
+#define WATERLILY_H
 #include "Aquatic.h"
 
 /**
- * @class Mangrove
- * @brief A resilient aquatic tree that thrives in coastal environments
+ * @class WaterLily
+ * @brief A beautiful aquatic plant with floating leaves and flowers
  * @author Cleopatra
  */
-class Mangrove : public Aquatic{
+class WaterLily : public Aquatic{
 public:
-    Mangrove();
+    WaterLily();
 
     /**
      * @brief Parameterized constructor for custom Rose properties
@@ -24,7 +24,7 @@ public:
      * @param desc Description of the plant characteristics
      * @param colourType Initial color implementation type (e.g., "red", "green", "yellow")
      */
-    Mangrove(const std::string& n, double p, const std::string& desc, std::string& colourType);
+    WaterLily(const std::string& n, double p, const std::string& desc, std::string& colourType);
 
     /**
      * @brief Creates a deep copy of the Rose object

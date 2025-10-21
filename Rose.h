@@ -1,5 +1,5 @@
 /**
- * @file Outdoor.h
+ * @file Rose.h
  * @brief Inherited from PlantType
  *
 */
@@ -18,7 +18,7 @@
  * @see PlantType, Outdoor, ColourImplementation
  * @author Cleopatra
  */
-class Rose : public OutdoorPlant {
+class Rose : public Outdoor{
 public:
     Rose();
 

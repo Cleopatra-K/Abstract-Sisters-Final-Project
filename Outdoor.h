@@ -13,9 +13,9 @@ Possible subtypes (categories) of plant factories.
  * These plants like sunshine, rain, and lots of space to grow.
  * Examples: Roses, Sunflowers, Trees
  */
-class OutdoorPlant : public PlantType {
+class Outdoor: public PlantType {
 public:
-    OutdoorPlant(const std::string& n, double p, const std::string& desc);
+    Outdoor(const std::string& n, double p, const std::string& desc);
     virtual PlantType* clone() const override = 0;
     std::string getCategory() const override;
     void display() const override;

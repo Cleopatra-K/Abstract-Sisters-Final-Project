@@ -13,9 +13,9 @@ Possible subtypes (categories) of plant factories.
  * These plants like being inside where it's warm and safe.
  * Examples: Peace Lilies, Spider Plants, Succulents
  */
-class IndoorPlant : public PlantType {
+class Indoor: public PlantType {
 public:
-    IndoorPlant(const std::string& n, double p, const std::string& desc);
+    Indoor(const std::string& n, double p, const std::string& desc);
     virtual PlantType* clone() const override = 0;
     std::string getCategory() const override;
     void display() const override;
