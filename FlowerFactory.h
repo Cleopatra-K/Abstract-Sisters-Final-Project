@@ -25,7 +25,6 @@ public:
 
     // Specific flower creation methods (implementations defer instantiation)
     PlantType* createRose(double price = 25.0) const; 
-    PlantType* createJacaranda(double price = 45.0) const; 
     PlantType* createPeaceLily(double price = 30.0) const; 
     PlantType* createWaterLily(double price = 35.0) const; 
     
