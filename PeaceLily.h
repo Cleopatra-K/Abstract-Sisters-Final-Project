@@ -9,9 +9,17 @@
 
 /**
  * @class PeaceLily
- * @brief An elegant indoor plant with white blooms
+ * @brief A PeaceLily
+ * 
+ * This class participates in multiple design patterns:
+ * 1. Bridge - RefinedAbstraction
+ * 2. ??
+ * 
+ * @ingroup Plants
+ * @see PlantType, Outdoor, ColourImplementation, PruningStrategy
  * @author Cleopatra
  */
+
 class PeaceLily : public Indoor{
 public:
     PeaceLily();

@@ -9,9 +9,17 @@
 
 /**
  * @class Mangrove
- * @brief A resilient aquatic tree that thrives in coastal environments
+ * @brief A Mangrove
+ * 
+ * This class participates in multiple design patterns:
+ * 1. Bridge - RefinedAbstraction
+ * 2. ??
+ * 
+ * @ingroup Plants
+ * @see PlantType, Outdoor, ColourImplementation, PruningStrategy
  * @author Cleopatra
  */
+
 class Mangrove : public Aquatic{
 public:
     Mangrove();

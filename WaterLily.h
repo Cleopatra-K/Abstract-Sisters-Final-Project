@@ -9,9 +9,17 @@
 
 /**
  * @class WaterLily
- * @brief A beautiful aquatic plant with floating leaves and flowers
+ * @brief A WaterLily
+ * 
+ * This class participates in multiple design patterns:
+ * 1. Bridge - RefinedAbstraction
+ * 2. ??
+ * 
+ * @ingroup Plants
+ * @see PlantType, Outdoor, ColourImplementation, PruningStrategy
  * @author Cleopatra
  */
+
 class WaterLily : public Aquatic{
 public:
     WaterLily();

@@ -9,9 +9,17 @@
 
 /**
  * @class BonsaiTree
- * @brief A miniature indoor tree cultivated in a pot
+ * @brief A meticulously cultivated miniature tree for outdoor decoration
+ * 
+ * This class participates in multiple design patterns:
+ * 1. Bridge - RefinedAbstraction
+ * 2. ??
+ * 
+ * @ingroup Plants
+ * @see PlantType, Outdoor, ColourImplementation, PruningStrategy
  * @author Cleopatra
  */
+
 class BonsaiTree : public Indoor{
 public:
     BonsaiTree();

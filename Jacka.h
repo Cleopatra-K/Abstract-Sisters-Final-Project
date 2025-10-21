@@ -8,10 +8,18 @@
 #include "Outdoor.h"
 
 /**
- * @class Jacaranda
- * @brief A vibrant outdoor flowering tree
+ * @class Jacka
+ * @brief A tree
+ * 
+ * This class participates in multiple design patterns:
+ * 1. Bridge - RefinedAbstraction
+ * 2. ??
+ * 
+ * @ingroup Plants
+ * @see PlantType, Outdoor, ColourImplementation, PruningStrategy
  * @author Cleopatra
  */
+
 class Jacka: public Outdoor{
 public:
     Jacka();
