@@ -7,7 +7,7 @@
 #ifndef PLANTTYPE_H
 #define PLANTTYPE_H
 #include <string>
-#include "PlantState.h"
+//#include "PlantState.h"
 
 
 /**
@@ -25,8 +25,13 @@
  */
 
 class ColourImplementation;
+class PlantState;
 
 class PlantType{
+    private:
+        ColourImplementation* colourImpl;
+
+        ColourImplementation* createColour(std::string);
 // PlantType abstract base class
     protected:
         std::string name;
@@ -36,8 +41,23 @@ class PlantType{
         int health;
         int days;
 
+        std::string getColour();
+
+        bool hasColour();
+
     public:
         PlantType(const std::string& n, double p, const std::string& desc);
+
+        /**
+         * @brief Constructs a PlantType with initial color
+         * 
+         * @param colourType Initial color type for the plant
+         */
+        PlantType(std::string& colourType);
+
+        /**
+         * @brief Virtual destructor for proper cleanup
+         */
         virtual ~PlantType();
 
         // Core methods prototype is here as well
@@ -86,22 +106,13 @@ class PlantType{
         int getDays() const;
         void setHealth(int h);
         void setDays(int d);
-    private:
-        ColourImplementation* colourImpl;
 
-        ColourImplementation* createColour(std::string){}
 
-    protected:
-        std::string getColour(){}
-
-        bool hasColour(){}
-
-    public:
-        PlantType(std::string& colourType){}
-        virtual ~PlantType(){}
-        virtual void printPlant() = 0;
-
-        void setColour(std::string& colourType){}
+        /**
+         * @brief Dynamically changes the plant's color implementation
+         * @param colourType The new color type to apply to the plant
+         */
+        void setColour(std::string& colourType);
 };
 
 #endif
