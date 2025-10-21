@@ -63,6 +63,15 @@ class PlantType{
         bool hasColour();
 
 
+        // Plant care methods, for template
+        virtual void fertilize();
+        virtual void grow();
+        virtual void giveAttention();
+        virtual void removeWeed();
+        virtual void water();
+        virtual void sunlight();
+
+
     public:
         PlantType(const std::string& n, double p, const std::string& desc);
 
@@ -99,14 +108,9 @@ class PlantType{
          */
         virtual std::string getCategory() const = 0;
         
-        // Plant care methods, for template
-        virtual void fertilize();
-        virtual void grow();
-        virtual void giveAttention();
-        virtual void removeWeed();
-        virtual void water();
-        virtual void sunlight();
-        
+        //template method
+        void careForPlant();
+
         // Observer pattern methods (if needed)
         // virtual void attach();
         // virtual void detach();

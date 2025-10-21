@@ -42,5 +42,15 @@ public:
      * @return Pointer to a new Rose object that is a copy of this one
      */
     PlantType* clone() const override;
+
+protected:
+
+    // Template method
+    // Primitive operations inherited from abstract class in template
+    virtual void fertilize();
+    virtual void grow();
+    virtual void giveAttention();
+    virtual void water();
+    virtual void sunlight();
 };
 #endif
