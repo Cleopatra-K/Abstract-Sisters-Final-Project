@@ -1,0 +1,1 @@
+/*Base interface for discount strategies applied at checkout.*/

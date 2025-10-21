@@ -1,0 +1,3 @@
+/*
+Applies discounts when customers buy in bulk.
+*/

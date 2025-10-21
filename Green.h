@@ -1,0 +1,3 @@
+/*
+Concrete implementor for green plants.
+*/

@@ -1,0 +1,3 @@
+/*
+Manages communication between customers and staff.
+*/

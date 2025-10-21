@@ -1,0 +1,3 @@
+/*
+Base interface for mediators. Defines communication between components.
+*/

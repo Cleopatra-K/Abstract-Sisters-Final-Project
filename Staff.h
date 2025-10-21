@@ -1,0 +1,3 @@
+/*
+Abstract base class for staff roles. Communicates through the Mediator.
+*/

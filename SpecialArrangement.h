@@ -1,0 +1,3 @@
+/*
+Another composite variation for flower arrangements.
+*/

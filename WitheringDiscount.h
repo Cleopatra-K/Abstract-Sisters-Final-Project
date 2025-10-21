@@ -1,0 +1,2 @@
+/*
+Applies discounts for plants nearing end of life.*/

@@ -1,0 +1,3 @@
+/*
+Applies discounts based on the current season.
+*/

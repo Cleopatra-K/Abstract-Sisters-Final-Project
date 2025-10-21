@@ -1,0 +1,3 @@
+/*
+Applies a discount when a customer buys plants from the same family.
+*/

@@ -1,0 +1,3 @@
+/*
+Command for removing a plant from inventory.
+*/

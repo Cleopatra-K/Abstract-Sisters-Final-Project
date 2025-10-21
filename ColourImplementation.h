@@ -1,0 +1,3 @@
+/*
+Abstract implementor defining interface for applying colour to plants.
+*/

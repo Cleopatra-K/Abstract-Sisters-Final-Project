@@ -1,0 +1,3 @@
+/*
+Interface for creating iterators. Represents the collection of plants.
+*/

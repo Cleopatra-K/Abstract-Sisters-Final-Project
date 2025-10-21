@@ -1,0 +1,3 @@
+/*
+Abstract decorator extending PlantType. Wraps another plant to add behaviour.
+*/

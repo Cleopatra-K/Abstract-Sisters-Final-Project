@@ -1,0 +1,3 @@
+/*
+Command for adding a decorative pot to a plant.
+*/

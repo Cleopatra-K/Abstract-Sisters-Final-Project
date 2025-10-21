@@ -1,0 +1,3 @@
+/*
+Concrete strategy that defines how staff give advice to customers.
+*/

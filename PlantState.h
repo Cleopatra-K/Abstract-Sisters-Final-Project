@@ -1,0 +1,3 @@
+/*
+Abstract state interface for different life stages of a plant.
+*/

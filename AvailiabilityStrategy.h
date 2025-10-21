@@ -1,0 +1,3 @@
+/*
+Concrete strategy that defines how staff communicate plant availability.
+*/

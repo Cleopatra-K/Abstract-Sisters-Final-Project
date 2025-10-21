@@ -1,0 +1,3 @@
+/*
+Adds a decorative pot to a plant.
+*/

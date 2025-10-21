@@ -1,0 +1,2 @@
+/*
+Abstract factory defining the interface for creating plants.*/

@@ -1,0 +1,3 @@
+/*
+Concrete colleague that interacts with Staff via the InteractionMediator.
+*/
