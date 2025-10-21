@@ -40,6 +40,7 @@ class PlantType{
          */
         ColourImplementation* createColour(std::string);
 
+
 // PlantType abstract base class
     protected:
         std::string name;
@@ -61,15 +62,19 @@ class PlantType{
          */
         bool hasColour();
 
+
     public:
         PlantType(const std::string& n, double p, const std::string& desc);
 
         /**
-         * @brief Constructs a PlantType with initial color
+         * @brief Constructs a PlantType with initial properties and color
          * 
+         * @param n The name of the plant
+         * @param p The price of the plant
+         * @param desc The description of the plant
          * @param colourType Initial color type for the plant
          */
-        PlantType(std::string& colourType);
+        PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType);
 
         /**
          * @brief Virtual destructor for proper cleanup
