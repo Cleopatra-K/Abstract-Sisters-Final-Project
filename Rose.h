@@ -1,5 +1,7 @@
-/*
-Concrete “leaf” components extending PlantType. Represent individual plants.
+/**
+ * @file Outdoor.h
+ * @brief Inherited from PlantType
+ *
 */
 #ifndef ROSE_H
 #define ROSE_H

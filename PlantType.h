@@ -29,9 +29,17 @@ class PlantState;
 
 class PlantType{
     private:
-        ColourImplementation* colourImpl;
+        ColourImplementation* colourImpl; ///< Pointer to the color implementation (Implementor in Bridge pattern)
 
+        /**
+         * @brief Factory method to create appropriate ColourImplementation
+         * 
+         * @param colourType String identifier for the desired color implementation
+         * @return Pointer to the newly created ColourImplementation object
+         * @note This method encapsulates the creation logic, allowing the Abstraction to control which ConcreteImplementor is used
+         */
         ColourImplementation* createColour(std::string);
+
 // PlantType abstract base class
     protected:
         std::string name;
@@ -41,8 +49,16 @@ class PlantType{
         int health;
         int days;
 
+        /**
+         * @brief Retrieves the current color of the plant
+         * @return String representing the plant's current color
+         */
         std::string getColour();
 
+        /**
+         * @brief Checks if the plant currently has a color implementation
+         * @return true if colourImpl is not null, false otherwise
+         */
         bool hasColour();
 
     public:
