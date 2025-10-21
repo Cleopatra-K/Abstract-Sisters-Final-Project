@@ -13,7 +13,7 @@
 /**
  * @brief Participates in the following design patterns:
  * 1. Bridge - abstraction for the bridge design pattern
- * 
+ * 2. ??
  */
 
 /**
