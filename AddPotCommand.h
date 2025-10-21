@@ -1,3 +1,9 @@
-/*
-Command for adding a decorative pot to a plant.
-*/
+#ifndef ADDPOTCOMMAND_H
+#define ADDPOTCOMMAND_H
+#include "Command.h"
+
+class AddPotCommand : public Command{
+
+};
+
+#endif ADDPOTCOMMAND_H
