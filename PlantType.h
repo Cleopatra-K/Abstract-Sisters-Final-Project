@@ -24,6 +24,8 @@
  * It knows its name, price, how healthy it is, and what stage it's in.
  */
 
+class ColourImplementation;
+
 class PlantType{
 // PlantType abstract base class
     protected:
@@ -84,7 +86,22 @@ class PlantType{
         int getDays() const;
         void setHealth(int h);
         void setDays(int d);
+    private:
+        ColourImplementation* colourImpl;
 
+        ColourImplementation* createColour(std::string){}
+
+    protected:
+        std::string getColour(){}
+
+        bool hasColour(){}
+
+    public:
+        PlantType(std::string& colourType){}
+        virtual ~PlantType(){}
+        virtual void printPlant() = 0;
+
+        void setColour(std::string& colourType){}
 };
 
 #endif
