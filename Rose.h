@@ -12,7 +12,7 @@
  * @brief  A beautiful outdoor flower with thorns
  * This class participates in multiple design patterns:
  * 1. Bridge- RefinedAbstraction
- * 2.  ??
+ * 2. Composite - Leaf
  *
  * @ingroup Plants
  * @see PlantType, Outdoor, ColourImplementation

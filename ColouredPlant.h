@@ -1,3 +1,6 @@
+//I am confused what this class is for??
+
+
 #ifndef COLOUREDPLANT_h
 #define COLOUREDPLANT_H
 
