@@ -17,48 +17,46 @@
  * allowing hierarchical structures of plant collections. The ShoppingCart
  * can treat Bundles and individual plants uniformly through the PlantType interface.
  * 
- * @note Uses raw pointers with ownership semantics - Bundle owns its contained plants
+ * @note Uses non-owning pointers - Customer owns all plants
  */
 class Bundle : public PlantType {
 private:
-    std::string name;
-    std::vector<PlantType*> plants;  ///< Owned plant pointers
-    double bundleDiscount; ///< Additional discount for buying as bundle
+    std::vector<PlantType*> plants;  ///< Non-owning plant pointers
 
 public:
-    Bundle(const std::string& bundleName, double discount = 0.1);
+    /**
+     * @brief Constructs a Bundle with a name
+     * 
+     * @param bundleName Name of the bundle
+     */
+    Bundle(const std::string& bundleName);
     
     /**
-     * @brief Destructor - deletes all owned plants
+     * @brief Destructor - does NOT delete plants (Customer owns them)
      */
     ~Bundle();
     
+    // Composite Pattern Methods
     /**
-     * @brief Adds a plant to the bundle (takes ownership)
+     * @brief Adds a plant to the bundle (non-owning reference)
      * 
-     * @param plant Plant to add (Bundle takes ownership)
+     * @param plant Plant to add (Customer maintains ownership)
      */
-    void addPlant(PlantType* plant);
+    void add(PlantType* plant) override;
     
     /**
-     * @brief Removes a plant from the bundle (transfers ownership to caller)
+     * @brief Removes a plant from the bundle
      * 
-     * @param plant Plant to remove
-     * @return Pointer to removed plant (caller takes ownership)
+     * @param plant Plant to remove (Customer still owns the plant)
      */
-    PlantType* removePlant(PlantType* plant);
-    
-    // PlantType interface implementation
-    double getPrice();
-    std::string getName();
-    std::string getDescription();
-    void printPlant();
-    PlantType* clone();
+    void remove(PlantType* plant) override;
     
     /**
-     * @brief Prevent copying (or implement deep copy)
+     * @brief Gets all plants in this bundle
+     * 
+     * @return Vector of plant pointers in this bundle
      */
-    Bundle(const Bundle&) = delete;
-    Bundle& operator=(const Bundle&) = delete;
+    std::vector<PlantType*> getChildren() override;
 };
+
 #endif
