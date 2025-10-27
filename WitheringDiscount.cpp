@@ -3,11 +3,11 @@
 #include "PlantType.h"
 #include <sstream>
 
-WitheringDiscountStrategy::WitheringDiscountStrategy(double discount){
+WitheringDiscount::WitheringDiscount(double discount){
     discountPercentage=discount;
 }
 
-double WitheringDiscountStrategy::applyDiscount(ShoppingCart* cart) {
+double WitheringDiscount::applyDiscount(ShoppingCart* cart) {
     double subtotal = cart->calculateSubtotal();
     double discountAmount = 0.0;
     
@@ -22,18 +22,18 @@ double WitheringDiscountStrategy::applyDiscount(ShoppingCart* cart) {
     return subtotal - discountAmount;
 }
 
-std::string WitheringDiscountStrategy::getDescription() {
+std::string WitheringDiscount::getDescription() {
     std::stringstream description;
 
     description << "Withering Plant Discount - " << (discountPercentage * 100) << "% off on plants in withering state";
     return description.str();
 }
 
-double WitheringDiscountStrategy::getDiscountPercentage(){
+double WitheringDiscount::getDiscountPercentage(){
     return discountPercentage;
 }
 
-bool WitheringDiscountStrategy::isPlantWithering(PlantType* plant){
+bool WitheringDiscount::isPlantWithering(PlantType* plant){
     // Call getStateName() on the plant's current state
     return plant->getStateAsString() == "Withering";
 }

@@ -18,7 +18,7 @@ class PlantType;
  * @class WitheringDiscountStrategy
  * @brief Concrete strategy that applies discounts to withering plants
  */
-class WitheringDiscountStrategy : public DiscountStrategy {
+class WitheringDiscount : public DiscountStrategy {
 private:
     double discountPercentage;   ///< Discount percentage 
 
@@ -28,7 +28,7 @@ public:
      * 
      * @param discount Percent discount (e.g., 0.25 for 25% off)
      */
-    WitheringDiscountStrategy(double discount);
+    WitheringDiscount(double discount);
     
     /**
      * @brief Applies withering discount to eligible plants in cart

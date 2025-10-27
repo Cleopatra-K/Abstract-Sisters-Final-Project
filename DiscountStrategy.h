@@ -32,7 +32,7 @@ public:
      * @param cart The shopping cart containing plants to evaluate
      * @return The discounted total price
      */
-    virtual double applyDiscount(const ShoppingCart* cart) = 0;
+    virtual double applyDiscount(ShoppingCart* cart) = 0;
     
     /**
      * @brief Gets a description of the discount strategy

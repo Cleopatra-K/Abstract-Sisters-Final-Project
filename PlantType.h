@@ -87,8 +87,7 @@ class PlantType{
          * @param desc The description of the plant
          * @param colourType Initial color type for the plant
          */
-        PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType);
-
+PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season);
         /**
          * @brief Virtual destructor for proper cleanup
          */
