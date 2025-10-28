@@ -64,6 +64,9 @@ class PlantType{
 
 
     public:
+
+        PlantType(){};
+
         PlantType(const std::string& n, double p, const std::string& desc);
 
         /**
@@ -146,27 +149,27 @@ class PlantType{
          */
         void setColour(const std::string& colourType);
 
-        // //Composite design pattern stuff
-        // /**
-        //  * @brief Adds a child component - pure virtual
-        //  * @param component The plant component to add
-        //  * @note Composite (Bundle) must implement this, Leaf throws exception
-        //  */
-        // virtual void add(PlantType* component) = 0;
+        //Composite design pattern stuff
+        /**
+         * @brief Adds a child component - pure virtual
+         * @param component The plant component to add
+         * @note Composite (Bundle) must implement this, Leaf throws exception
+         */
+        virtual void add(PlantType* component) = 0;
 
-        // /**
-        //  * @brief Removes a child component - pure virtual
-        //  * @param component The plant component to remove
-        //  * @note Composite (Bundle) must implement this, Leaf throws exception
-        //  */
-        // virtual void remove(PlantType* component) = 0;
+        /**
+         * @brief Removes a child component - pure virtual
+         * @param component The plant component to remove
+         * @note Composite (Bundle) must implement this, Leaf throws exception
+         */
+        virtual void remove(PlantType* component) = 0;
 
-        // /**
-        //  * @brief Gets child components - pure virtual
-        //  * @return Vector of child components
-        //  * @note Composite returns children, Leaf returns empty vector
-        //  */
-        // virtual std::vector<PlantType*> getChildren() = 0;
+        /**
+         * @brief Gets child components - pure virtual
+         * @return Vector of child components
+         * @note Composite returns children, Leaf returns empty vector
+         */
+        virtual std::vector<PlantType*> getChildren() = 0;
 };
 
 #endif

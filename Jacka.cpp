@@ -40,6 +40,16 @@ void Jacka::water() {
     std::cout << "Watering Jacaranda tree" << std::endl; 
 }
 
+void Jacka::add(PlantType* plant){
+
+}
+
+void Jacka::remove(PlantType* plant){
+
+}
+
+std::vector<PlantType*> Jacka::getChildren(){
+    return std::vector<PlantType*>();
 void Jacka::sunlight() { 
     std::cout << "Jacaranda tree enjoying sunlight" << std::endl; 
 }

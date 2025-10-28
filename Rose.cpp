@@ -15,6 +15,16 @@ std::string Rose::getCategory() const {
     return "Outdoor";
 }
 
+void Rose::add(PlantType* plant){
+
+}
+
+void Rose::remove(PlantType* plant){
+
+}
+
+std::vector<PlantType*> Rose::getChildren(){
+    return std::vector<PlantType*>();
 void Rose::display() const {
     std::cout << "Rose: " << getName() << " | Price: R" << getPrice() 
         << " | " << getDescription() << std::endl;
