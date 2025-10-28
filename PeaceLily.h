@@ -6,6 +6,8 @@
 #ifndef PEACELILY_H
 #define PEACELILY_H
 #include "Indoor.h"
+#include <iostream>
+
 
 /**
  * @class PeaceLily
@@ -43,6 +45,9 @@ public:
      */
     PlantType* clone() const override;
 
+    std::string getCategory() const override;
+    void display() const override;
+
 protected:
 
     // Template method
@@ -73,5 +78,10 @@ protected:
      * @return Vector of plant pointers in this bundle
      */
     std::vector<PlantType*> getChildren();
+    virtual void fertilize()override;
+    virtual void grow()override;
+    virtual void giveAttention()override;
+    virtual void water()override;
+    virtual void sunlight()override;
 };
 #endif
