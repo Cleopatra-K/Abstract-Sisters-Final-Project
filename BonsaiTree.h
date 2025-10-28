@@ -6,6 +6,8 @@
 #ifndef BONSAITREE_H
 #define BONSAITREE_H
 #include "Indoor.h"
+#include <iostream>
+
 
 /**
  * @class BonsaiTree
@@ -43,14 +45,17 @@ public:
      */
     PlantType* clone() const override;
 
+    std::string getCategory() const override;
+    void display() const override;
+
 protected:
 
     // Template method
     // Primitive operations inherited from abstract class in template
-    virtual void fertilize();
-    virtual void grow();
-    virtual void giveAttention();
-    virtual void water();
-    virtual void sunlight();
+    virtual void fertilize()override;
+    virtual void grow()override;
+    virtual void giveAttention()override;
+    virtual void water()override;
+    virtual void sunlight()override;
 };
 #endif
