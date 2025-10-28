@@ -26,9 +26,9 @@ COV_TARGET = plant_system_cov
 SRCS = main.cpp FlowerFactory.cpp TreeFactory.cpp \
 	Rose.cpp Jacka.cpp PeaceLily.cpp BonsaiTree.cpp WaterLily.cpp Mangrove.cpp \
 	PlantType.cpp \
-	BulkDiscount.cpp Customer.cpp SeasonalDiscount.cpp ShoppingCart.cpp WitheringDiscount.cpp \
-	GreenHouse.cpp \
-	Red.cpp Green.cpp Yellow.cpp ColorImplementation.cpp \
+	ColourImplementation.cpp Red.cpp Green.cpp Yellow.cpp 
+# 	BulkDiscount.cpp Customer.cpp SeasonalDiscount.cpp ShoppingCart.cpp WitheringDiscount.cpp \
+	GreenHouse.cpp 
 
 
 # Object files
@@ -40,8 +40,8 @@ COV_OBJS = $(SRCS:.cpp=.cov.o)
 HEADERS = PlantType.h PlantFactory.h FlowerFactory.h TreeFactory.h \
 	Outdoor.h Indoor.h Aquatic.h \
 	Rose.h Jacka.h PeaceLily.h BonsaiTree.h WaterLily.h Mangrove.h\
-	ColorImplementation.h Red.h Green.h Yellow.h \
-	BulkDiscount.h Customer.h SeasonalDiscount.h ShoppingCart.h WitheringDiscount.h \
+	ColourImplementation.h Red.h Green.h Yellow.h 
+# 	BulkDiscount.h Customer.h SeasonalDiscount.h ShoppingCart.h WitheringDiscount.h 
 
 # =======================================================================
 # BUILD TARGETS
@@ -155,5 +155,3 @@ help:
 	@echo "  zip       - Create submission package u23547121.zip"
 
 .PHONY: all test asan valgrind coverage gdb clean zip help
-
-

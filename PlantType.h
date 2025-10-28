@@ -41,12 +41,12 @@ class PlantType{
          * @note This method encapsulates the creation logic, allowing the Abstraction to control which ConcreteImplementor is used
          */
         ColourImplementation* createColour(std::string colourType);
+        PlantState* currentState;
 
         // PlantType abstract base class
         std::string name;
         double price;
         std::string description;
-        PlantState* currentState;
         int health;
         int days;
         std::string uniqueID;
@@ -54,19 +54,6 @@ class PlantType{
         // std::string colour;
 
     protected:
-        /**
-         * @brief Retrieves the current color of the plant
-         * @return String representing the plant's current color
-         */
-        std::string getColour();
-
-        /**
-         * @brief Checks if the plant currently has a color implementation
-         * @return true if colourImpl is not null, false otherwise
-         */
-        bool hasColour();
-
-
         // Plant care methods, for template
         virtual void fertilize();
         virtual void grow();
@@ -87,7 +74,8 @@ class PlantType{
          * @param desc The description of the plant
          * @param colourType Initial color type for the plant
          */
-        PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string& season);
+        PlantType(const std::string& n, double p, const std::string& desc, const std::string& colourType, const std::string season);
+
         /**
          * @brief Virtual destructor for proper cleanup
          */
@@ -140,12 +128,23 @@ class PlantType{
         void setSeason(const std::string& s);
         // std::string getStateAsString() ;
 
+         /**
+         * @brief Retrieves the current color of the plant
+         * @return String representing the plant's current color
+         */
+        std::string getColour() const;
+
+        /**
+         * @brief Checks if the plant currently has a color implementation
+         * @return true if colourImpl is not null, false otherwise
+         */
+        bool hasColour() const;
 
         /**
          * @brief Dynamically changes the plant's color implementation
          * @param colourType The new color type to apply to the plant
          */
-        void setColour(std::string& colourType);
+        void setColour(const std::string& colourType);
 
         // //Composite design pattern stuff
         // /**
