@@ -3,32 +3,45 @@
 #include "PeaceLily.h"
 #include "WaterLily.h"
 
-// Factory Method 1: Default creation
+// Factory Method 1: Create default flower (Rose)
 PlantType* FlowerFactory::createPlant() const {
-    // Default plant returned by FlowerFactory is Rose 
-    // The Rose constructor initializes name, price, and description 
-    return new Rose(); 
+    std::cout << "FlowerFactory: Creating default Rose..." << std::endl;
+    return new Rose();  // Use default constructor
 }
 
-// Factory Method 2: Price specified creation
+// Factory Method 2: Create default flower with custom price
 PlantType* FlowerFactory::createPlant(double price) const {
-    return new Rose(price); // Use parameterized constructor 
+    std::cout << "FlowerFactory: Creating Rose with custom price..." << std::endl;
+    return createRose(price);
 }
 
-// Specific creation methods (convenience methods often included in Factory Method)
 PlantType* FlowerFactory::createRose(double price) const {
-    return new Rose(price); 
+    std::string colourType = "red";
+    std::string name = "Rose";
+    std::string desc = "Beautiful flowering plant with thorns";
+    Rose* rose = new Rose(name, price, desc, colourType);
+    std::cout << "Created: Rose at R" << price << std::endl;
+    return rose;
 }
 
 PlantType* FlowerFactory::createPeaceLily(double price) const {
-    return new PeaceLily(price); 
+    std::string colourType = "white";
+    std::string name = "Peace Lily";
+    std::string desc = "Elegant indoor plant with white flowers";
+    PeaceLily* lily = new PeaceLily(name, price, desc, colourType);
+    std::cout << "Created: Peace Lily at R" << price << std::endl;
+    return lily;
 }
 
 PlantType* FlowerFactory::createWaterLily(double price) const {
-    return new WaterLily(price); 
+    std::string colourType = "pink";
+    std::string name = "Water Lily";
+    std::string desc = "Beautiful floating aquatic plant";
+    WaterLily* wlily = new WaterLily(name, price, desc, colourType);
+    std::cout << "Created: Water Lily at R" << price << std::endl;
+    return wlily;
 }
 
-// Required accessor (Creator participant)
 std::string FlowerFactory::getFactoryType() const {
-    return "Flower Factory"; 
+    return "FlowerFactory";
 }
