@@ -2,8 +2,10 @@
 
 PeaceLily::PeaceLily() : Indoor("Peace Lily", 30.0, "Elegant indoor plant with white flowers") {}
 
-PeaceLily::PeaceLily(const std::string& n, double p, const std::string& desc, std::string& colourType) 
-    : Indoor(n, p, desc, colourType) {}
+PeaceLily::PeaceLily(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) 
+    : Indoor(n, p, desc, colourType) {
+        (void)season;
+    }
 
 PlantType* PeaceLily::clone() const {
     return new PeaceLily(*this);

@@ -18,8 +18,9 @@ PlantType* FlowerFactory::createPlant(double price) const {
 PlantType* FlowerFactory::createRose(double price) const {
     std::string colourType = "red";
     std::string name = "Rose";
+    std::string season = "Spring";
     std::string desc = "Beautiful flowering plant with thorns";
-    Rose* rose = new Rose(name, price, desc, colourType);
+    Rose* rose = new Rose(name, price, desc, colourType, season);
     std::cout << "Created: Rose at R" << price << std::endl;
     return rose;
 }
@@ -27,8 +28,9 @@ PlantType* FlowerFactory::createRose(double price) const {
 PlantType* FlowerFactory::createPeaceLily(double price) const {
     std::string colourType = "white";
     std::string name = "Peace Lily";
+    std::string season = "Summer";
     std::string desc = "Elegant indoor plant with white flowers";
-    PeaceLily* lily = new PeaceLily(name, price, desc, colourType);
+    PeaceLily* lily = new PeaceLily(name, price, desc, colourType, season);
     std::cout << "Created: Peace Lily at R" << price << std::endl;
     return lily;
 }
@@ -36,8 +38,9 @@ PlantType* FlowerFactory::createPeaceLily(double price) const {
 PlantType* FlowerFactory::createWaterLily(double price) const {
     std::string colourType = "pink";
     std::string name = "Water Lily";
+    std::string season = "Summer";
     std::string desc = "Beautiful floating aquatic plant";
-    WaterLily* wlily = new WaterLily(name, price, desc, colourType);
+    WaterLily* wlily = new WaterLily(name, price, desc, colourType, season);
     std::cout << "Created: Water Lily at R" << price << std::endl;
     return wlily;
 }

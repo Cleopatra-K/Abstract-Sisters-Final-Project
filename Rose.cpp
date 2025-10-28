@@ -3,7 +3,9 @@
 Rose::Rose() : Outdoor("Rose", 25.0, "Beautiful flower with thorns") {}
 
 Rose::Rose(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) 
-    : Outdoor(n, p, desc, colourType) {}
+    : Outdoor(n, p, desc, colourType) {
+        (void)season;
+    }
 
 PlantType* Rose::clone() const {
     return new Rose(*this);

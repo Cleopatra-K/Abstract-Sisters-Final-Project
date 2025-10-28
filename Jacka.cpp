@@ -3,7 +3,9 @@
 Jacka::Jacka() : Outdoor("Jacaranda Tree", 45.0, "Beautiful purple flowering tree") {}
 
 Jacka::Jacka(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) 
-    : Outdoor(n, p, desc, colourType) {}
+    : Outdoor(n, p, desc, colourType) {
+        (void)season;
+    }
 
 PlantType* Jacka::clone() const {
     return new Jacka(*this);

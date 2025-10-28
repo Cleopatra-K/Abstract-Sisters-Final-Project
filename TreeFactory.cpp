@@ -19,7 +19,8 @@ PlantType* TreeFactory::createBonsai(double price) const {
     std::string colourType = "green";
     std::string name = "Bonsai Tree";
     std::string desc = "Miniature cultivated tree requiring expert care";
-    BonsaiTree* bonsai = new BonsaiTree(name, price, desc, colourType);
+    std::string season = "Autumn";
+    BonsaiTree* bonsai = new BonsaiTree(name, price, desc, colourType, season);
     std::cout << "Created: Bonsai Tree at R" << price << std::endl;
     return bonsai;
 }
@@ -28,7 +29,8 @@ PlantType* TreeFactory::createMangrove(double price) const {
     std::string colourType = "green";
     std::string name = "Mangrove";
     std::string desc = "Salt-tolerant coastal tree";
-    Mangrove* mangrove = new Mangrove(name, price, desc, colourType);
+    std::string season = "Spring";
+    Mangrove* mangrove = new Mangrove(name, price, desc, colourType, season);
     std::cout << "Created: Mangrove at R" << price << std::endl;
     return mangrove;
 }
@@ -37,7 +39,8 @@ PlantType* TreeFactory::createJacarandaTree(double price) const {
     std::string colourType = "purple";
     std::string name = "Jacaranda";
     std::string desc = "Stunning purple-flowering tree";
-    Jacka* jacaranda = new Jacka(name, price, desc, colourType);
+    std::string season = "Summer";
+    Jacka* jacaranda = new Jacka(name, price, desc, colourType, season);
     std::cout << "Created: Jacaranda Tree at R" << price << std::endl;
     return jacaranda;
 }

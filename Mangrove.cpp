@@ -2,8 +2,10 @@
 
 Mangrove::Mangrove() : Aquatic("Mangrove", 55.0, "Coastal tree that grows in saltwater") {}
 
-Mangrove::Mangrove(const std::string& n, double p, const std::string& desc, std::string& colourType) 
-    : Aquatic(n, p, desc, colourType) {}
+Mangrove::Mangrove(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) 
+    : Aquatic(n, p, desc, colourType) {
+        (void)season;
+    }
 
 PlantType* Mangrove::clone() const {
     return new Mangrove(*this);
