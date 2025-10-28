@@ -4,3 +4,14 @@ Jacka::Jacka(const std::string &n, double p, const std::string &desc, std::strin
 
 }
 
+void Jacka::add(PlantType* plant){
+
+}
+
+void Jacka::remove(PlantType* plant){
+
+}
+
+std::vector<PlantType*> Jacka::getChildren(){
+    return std::vector<PlantType*>();
+}
