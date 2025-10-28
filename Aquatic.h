@@ -15,9 +15,23 @@ Possible subtypes (categories) of plant factories.
  */
 class Aquatic: public PlantType {
 public:
-    Aquatic(const std::string& n, double p, const std::string& desc);
+    Aquatic(const std::string& n, double p, const std::string& desc) 
+        : PlantType(n, p, desc) {}
+
+    Aquatic(const std::string& n, double p, const std::string& desc, std::string& colourType) 
+        : PlantType(n, p, desc) {(void)colourType;}
+
     virtual PlantType* clone() const override = 0;
-    std::string getCategory() const override;
-    void display() const override;
+    std::string getCategory() const override = 0;  // Still pure virtual
+    void display() const override = 0;
+    // std::string Aquatic::getCategory() const override {
+    //     return "Aquatic";
+    // }
+
+    // void Aquatic::display() const override {
+    //     std::cout << "Aquatic Plant: " << getName() << " | Price: R" << getPrice() 
+    //             << " | " << getDescription() << std::endl;
+    // }
+    
 };
 #endif
