@@ -1,5 +1,4 @@
-# u23547121 
-
+#Absatract Sisters Final Project Makefile 
 # =======================================================================
 # COMPILER AND FLAGS CONFIGURATION
 # =======================================================================
@@ -26,7 +25,11 @@ COV_TARGET = plant_system_cov
 # REMOVED: Outdoor.cpp Indoor.cpp Aquatic.cpp (abstract classes)
 SRCS = main.cpp FlowerFactory.cpp TreeFactory.cpp \
 	Rose.cpp Jacka.cpp PeaceLily.cpp BonsaiTree.cpp WaterLily.cpp Mangrove.cpp \
-	PlantType.cpp
+	PlantType.cpp \
+	ColourImplementation.cpp Red.cpp Green.cpp Yellow.cpp 
+# 	BulkDiscount.cpp Customer.cpp SeasonalDiscount.cpp ShoppingCart.cpp WitheringDiscount.cpp \
+	GreenHouse.cpp 
+
 
 # Object files
 OBJS = $(SRCS:.cpp=.o)
@@ -36,7 +39,9 @@ COV_OBJS = $(SRCS:.cpp=.cov.o)
 # Header files
 HEADERS = PlantType.h PlantFactory.h FlowerFactory.h TreeFactory.h \
 	Outdoor.h Indoor.h Aquatic.h \
-	Rose.h Jacka.h PeaceLily.h BonsaiTree.h WaterLily.h Mangrove.h
+	Rose.h Jacka.h PeaceLily.h BonsaiTree.h WaterLily.h Mangrove.h\
+	ColourImplementation.h Red.h Green.h Yellow.h 
+# 	BulkDiscount.h Customer.h SeasonalDiscount.h ShoppingCart.h WitheringDiscount.h 
 
 # =======================================================================
 # BUILD TARGETS
@@ -132,10 +137,10 @@ clean:
 
 # --- Create submission package ---
 zip: clean
-	@echo "Creating submission package u23547121.zip..."
-	zip -r u23547121.zip *.cpp *.h Makefile README* *.md 2>/dev/null || true
-	@echo "Created u23547121.zip"
-	@ls -lh u23547121.zip
+	@echo "Creating submission package abstratsisters.zip..."
+	zip -r abstratsisters.zip *.cpp *.h Makefile README* *.md 2>/dev/null || true
+	@echo "Created abstratsisters.zip"
+	@ls -lh abstratsisters.zip
 
 # --- Helper ---
 help:
