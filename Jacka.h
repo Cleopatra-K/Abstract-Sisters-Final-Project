@@ -52,5 +52,11 @@ protected:
     virtual void removeWeed();
     virtual void water();
     virtual void sunlight();
+
+   
+    
+
+
+    
 };
 #endif
