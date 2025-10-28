@@ -29,7 +29,7 @@ class ColourImplementation;
 class PlantState;
 class PlantType{
     private:
-        int nextID = 1000; 
+        static int nextID; 
 
         ColourImplementation* colourImpl; ///< Pointer to the color implementation (Implementor in Bridge pattern)
 
@@ -51,7 +51,7 @@ class PlantType{
         int days;
         std::string uniqueID;
         std::string season;
-        std::string colour;
+        // std::string colour;
 
     protected:
         /**
@@ -87,7 +87,7 @@ class PlantType{
          * @param desc The description of the plant
          * @param colourType Initial color type for the plant
          */
-PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season);
+        PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string& season);
         /**
          * @brief Virtual destructor for proper cleanup
          */
@@ -103,7 +103,7 @@ PlantType(const std::string& n, double p, const std::string& desc, std::string& 
         /**
          * @brief Shows all the plant's info on screen
          */
-        virtual void display() const;
+        virtual void display() const=0;
 
         /**
          * @brief Tells us where this plant likes to live
@@ -138,7 +138,7 @@ PlantType(const std::string& n, double p, const std::string& desc, std::string& 
         void setUniqueID(const std::string& id);
         std::string getSeason() const;
         void setSeason(const std::string& s);
-        std::string getStateAsString() ;
+        // std::string getStateAsString() ;
 
 
         /**
