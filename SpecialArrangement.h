@@ -8,11 +8,21 @@ class SpecialArrangementDecorator : public PlantDecorator {
 public:
     SpecialArrangementDecorator(PlantType* plant) : PlantDecorator(plant) {}
 
-    void display() const override {
+    void decorate() const override {
         if (decoratedPlant) {
-            decoratedPlant->display();
+            decoratedPlant->decorate();
+            std::cout << "\033[32m"; 
             std::cout << " + Arranged specially for the occasion!" << std::endl;
-        }
+            std::cout << "Adding special arrangement: ceramic pot, ribbon, and personalized card." << std::endl;
+            std::cout << "\033[0m"; 
+    
+            std::cout << "Enter personal message: ";
+            std::getline(std::cin, message);
+    
+            std::cout << "\033[32m"; 
+            std::cout << "Personalized Message: " << message << std::endl;
+    
+            std::cout << "\033[0m";
     }
 
     double orginalPrice = this->getPrice();
@@ -27,3 +37,4 @@ public:
 };
 
 #endif
+
