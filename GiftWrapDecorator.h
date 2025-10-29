@@ -8,7 +8,7 @@ class GiftWrapDecorator : public PlantDecorator {
 public:
     GiftWrapDecorator(PlantType* plant) : PlantDecorator(plant) {}
 
-    void decorate() const override {
+    void decorate() override {
         if (decoratedPlant) {
             decoratedPlant->decorate();
             std::cout << "\033[35m"
@@ -17,15 +17,18 @@ public:
     }
 
     double orginalPrice = this->getPrice();
-    double getPrice() const override {
+    double getPrice() override {
         return decoratedPlant ? decoratedPlant->getPrice() + 10.0 : orginalPrice;
     }
 
-    std::string getDescription() const override {
+    std::string getDescription() override {
         return decoratedPlant ? decoratedPlant->getDescription() + " with Gift Wrap" : " No Gift Wrap";
+    }
+    GiftWrapDecorator::~GiftWrapDecorator() {
     }
 };
 
 #endif
+
 
 
