@@ -50,6 +50,8 @@ void Jacka::remove(PlantType* plant){
 
 std::vector<PlantType*> Jacka::getChildren(){
     return std::vector<PlantType*>();
+}
+
 void Jacka::sunlight() { 
     std::cout << "Jacaranda tree enjoying sunlight" << std::endl; 
 }
