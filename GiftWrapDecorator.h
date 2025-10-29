@@ -8,9 +8,9 @@ class GiftWrapDecorator : public PlantDecorator {
 public:
     GiftWrapDecorator(PlantType* plant) : PlantDecorator(plant) {}
 
-    void display() const override {
+    void decorate() const override {
         if (decoratedPlant) {
-            decoratedPlant->display();
+            decoratedPlant->decorate();
             std::cout << "\033[35m"
                   << " + Wrapped beautifully for gifting!" << "\033[0m"<< std::endl;
         }
@@ -27,4 +27,5 @@ public:
 };
 
 #endif
+
 
