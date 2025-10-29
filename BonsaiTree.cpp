@@ -15,7 +15,7 @@ std::vector<PlantType*> BonsaiTree::getChildren(){
 }
 
 BonsaiTree::BonsaiTree(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) 
-    : Indoor(n, p, desc, colourType) {
+    : Indoor(n, p, desc, colourType, season) {
         (void)season;
     }
 
