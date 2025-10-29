@@ -1,22 +1,18 @@
 #include "BonsaiTree.h"
 
-BonsaiTree::BonsaiTree(const std::string &n, double p, const std::string &desc, std::string &colourType, std::string season):Indoor(n, p, desc, colourType, season){
-
-}
+BonsaiTree::BonsaiTree() : Indoor("Bonsai Tree", 60.0, "Miniature cultivated tree") {}
 
 void BonsaiTree::add(PlantType* plant){
-
+    (void)plant; // Unused - BonsaiTree is a leaf in Composite pattern
 }
 
 void BonsaiTree::remove(PlantType* plant){
-
+    (void)plant; // Unused - BonsaiTree is a leaf in Composite pattern
 }
 
 std::vector<PlantType*> BonsaiTree::getChildren(){
     return std::vector<PlantType*>();
 }
-
-BonsaiTree::BonsaiTree() : Indoor("Bonsai Tree", 60.0, "Miniature cultivated tree", "Green", "Autumn") {}
 
 BonsaiTree::BonsaiTree(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) 
     : Indoor(n, p, desc, colourType, season) {
@@ -38,22 +34,43 @@ void BonsaiTree::display() const {
 
 
 void BonsaiTree::fertilize() { 
-    std::cout << "Fertilizing bonsai tree" << std::endl; 
+    std::cout << "Fertilizing bonsai tree" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
 }
 
 void BonsaiTree::grow() { 
-    std::cout << "Bonsai tree growing slowly" << std::endl; 
+    std::cout << "Bonsai tree growing slowly" << std::endl;
+    int currentDays = getDays();
+    setDays(currentDays + 1);
 }
 
 void BonsaiTree::giveAttention() { 
-    std::cout << "Pruning and shaping bonsai tree" << std::endl; 
+    std::cout << "Pruning and shaping bonsai tree" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
+}
+
+void BonsaiTree::removeWeed() { 
+    std::cout << "Removing weeds around bonsai tree" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
 }
 
 void BonsaiTree::water() { 
-    std::cout << "Watering bonsai tree carefully" << std::endl; 
+    std::cout << "Watering bonsai tree carefully" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
 }
 
 void BonsaiTree::sunlight() { 
-    std::cout << "Bonsai tree enjoying filtered sunlight" << std::endl; 
+    std::cout << "Bonsai tree enjoying filtered sunlight" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
 }
 

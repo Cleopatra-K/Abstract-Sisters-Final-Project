@@ -66,7 +66,22 @@ PlantType::PlantType(const std::string& n, double p, const std::string& desc)
 }
 
 /**
- * @brief Full constructor with color support (Combined functionality)
+ * @brief Constructor with color support (4 arguments)
+ * @param n The name of the plant
+ * @param p The price of the plant
+ * @param desc The description of the plant  
+ * @param colourType The color type for Bridge Pattern
+ */
+PlantType::PlantType(const std::string& n, double p, const std::string& desc, 
+    const std::string& colourType)
+    : PlantType(n, p, desc) // Delegate to base constructor for ID generation
+{
+    // Initialize color
+    colourImpl = createColour(colourType);
+}
+
+/**
+ * @brief Full constructor with color and season support (Combined functionality)
  * @param n The name of the plant
  * @param p The price of the plant
  * @param desc The description of the plant  
@@ -81,6 +96,23 @@ PlantType::PlantType(const std::string& n, double p, const std::string& desc,
     // Your friend's color initialization
     colourImpl = createColour(colourType);
     this->season = season;
+}
+
+PlantType::PlantType(const PlantType& other)
+    : colourImpl(nullptr),
+      currentState(other.currentState),
+      name(other.name), 
+      price(other.price),
+      description(other.description),
+      health(other.health),
+      days(other.days),
+      uniqueID(other.uniqueID),
+      season(other.season)
+{
+    // Deep copy of colourImpl
+    if (other.colourImpl) {
+        colourImpl = createColour(other.getColour());
+    }
 }
 
 /**

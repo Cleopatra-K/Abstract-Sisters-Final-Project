@@ -21,37 +21,54 @@ void Jacka::display() const {
 }
 
 void Jacka::fertilize() { 
-    std::cout << "Fertilizing Jacaranda tree" << std::endl; 
+    std::cout << "Fertilizing Jacaranda tree" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
 }
 
 void Jacka::grow() { 
-    std::cout << "Jacaranda tree growing" << std::endl; 
+    std::cout << "Jacaranda tree growing" << std::endl;
+    int currentDays = getDays();
+    setDays(currentDays + 1);
 }
 
 void Jacka::giveAttention() { 
-    std::cout << "Giving attention to Jacaranda tree" << std::endl; 
+    std::cout << "Giving attention to Jacaranda tree" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
 }
 
 void Jacka::removeWeed() { 
-    std::cout << "Removing weeds around Jacaranda tree" << std::endl; 
+    std::cout << "Removing weeds around Jacaranda tree" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
 }
 
 void Jacka::water() { 
-    std::cout << "Watering Jacaranda tree" << std::endl; 
+    std::cout << "Watering Jacaranda tree" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
+}
+
+void Jacka::sunlight() { 
+    std::cout << "Jacaranda tree enjoying sunlight" << std::endl;
+    int currentHealth = getHealth();
+    setHealth(currentHealth + 5);
+    if (getHealth() > 100) setHealth(100);
 }
 
 void Jacka::add(PlantType* plant){
-
+    (void)plant; // Unused - Jacka is a leaf in Composite pattern
 }
 
 void Jacka::remove(PlantType* plant){
-
+    (void)plant; // Unused - Jacka is a leaf in Composite pattern
 }
 
 std::vector<PlantType*> Jacka::getChildren(){
     return std::vector<PlantType*>();
-}
-
-void Jacka::sunlight() { 
-    std::cout << "Jacaranda tree enjoying sunlight" << std::endl; 
 }
