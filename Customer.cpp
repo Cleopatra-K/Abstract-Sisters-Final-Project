@@ -75,7 +75,7 @@ void Customer::returnPlantsToInventory() {
 
 
 void Customer::processPayment(double amount) {
-    std::cout << "Processing payment of $" << amount << std::endl;
+    std::cout << "Processing payment of R" << amount << std::endl;
 }
 
 std::string Customer::getName(){
