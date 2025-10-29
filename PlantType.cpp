@@ -55,33 +55,37 @@ bool PlantType::hasColour() const{
  * @param p The price of the plant  
  * @param desc The description of the plant
  */
-PlantType::PlantType(const std::string& n, double p, const std::string& desc)
-    : colourImpl(NULL), currentState(NULL),name(n), price(p),
+PlantType::PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season) : colourImpl(NULL), currentState(NULL),name(n), price(p),
     description(desc),  health(100), days(0), season("Unknown"){
     
+
     // Your unique ID generation
     std::stringstream ss;
     ss << PlantType::nextID++;
     uniqueID = ss.str();
-}
 
-/**
- * @brief Full constructor with color support (Combined functionality)
- * @param n The name of the plant
- * @param p The price of the plant
- * @param desc The description of the plant  
- * @param colourType The color type for Bridge Pattern
- * @param season The growing season (default "Unknown")
- * @note Merges both your unique ID system and friend's color system
- */
-PlantType::PlantType(const std::string& n, double p, const std::string& desc, 
-    const std::string& colourType, const std::string season)
-    : PlantType(n, p, desc) // Delegate to base constructor for ID generation
-{
     // Your friend's color initialization
     colourImpl = createColour(colourType);
     this->season = season;
+
+    //currentState = new SeedlingState();
 }
+
+PlantType::PlantType(const PlantType& other): colourImpl(nullptr),
+        currentState(other.currentState),
+        name(other.name), 
+        price(other.price),
+        description(other.description),
+        health(other.health),
+        days(other.days),
+        uniqueID(other.uniqueID),
+        season(other.season)
+    {
+        // Deep copy of colourImpl
+        if (other.colourImpl) {
+            colourImpl = createColour(other.getColour());
+        }
+    }
 
 /**
  * @brief Destructor - cleans up color implementation
@@ -91,6 +95,9 @@ PlantType::~PlantType(){
     if(colourImpl){
         delete colourImpl;
     }
+
+    if(currentState)
+        delete currentState;
 }
 
 /**
@@ -134,10 +141,10 @@ void PlantType::display() const {
 void PlantType::careForPlant() {
     std::cout << "\n=== Caring for " << name << " ===" << std::endl;
     
-    water();
-    sunlight();
-    fertilize();
     removeWeed();
+    fertilize();
+    water();
+    sunlight(); 
     giveAttention();
     grow();
     
@@ -154,6 +161,22 @@ void PlantType::grow() {
     std::cout << name << " is growing..." << std::endl;
     days += 1;
 }
+
+std::string PlantType::getStateAsString() const{
+    if (currentState == nullptr) {
+        return "No State";
+    }
+    //return currentState->getStateName();  // Use the state's name
+    return " ";
+}
+
+// Make sure setState is implemented
+// void PlantType::setState(PlantState* state) {
+//     if (currentState != nullptr) {
+//         delete currentState;
+//     }
+//     currentState = state;
+// }
 
 void PlantType::giveAttention() {
     std::cout << "Giving attention to " << name << std::endl;

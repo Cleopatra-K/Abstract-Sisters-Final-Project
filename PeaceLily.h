@@ -35,7 +35,7 @@ public:
      * @param desc Description of the plant characteristics
      * @param colourType Initial color implementation type (e.g., "red", "green", "yellow")
      */
-    PeaceLily(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season);
+    PeaceLily(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season);
 
     /**
      * @brief Creates a deep copy of the Rose object
@@ -52,36 +52,32 @@ protected:
 
     // Template method
     // Primitive operations inherited from abstract class in template
-    virtual void fertilize();
-    virtual void grow();
-    virtual void giveAttention();
-    virtual void water();
-    virtual void sunlight();
+    void fertilize() override;
+    void grow() override;
+    void giveAttention() override;
+    void removeWeed() override;
+    void water() override;
+    void sunlight() override;
 
     /**
      * @brief Adds a plant to the bundle (non-owning reference)
      * 
      * @param plant Plant to add (Customer maintains ownership)
      */
-    void add(PlantType* plant);
+    void add(PlantType* plant) override;
     
     /**
      * @brief Removes a plant from the bundle
      * 
      * @param plant Plant to remove (Customer still owns the plant)
      */
-    void remove(PlantType* plant);
+    void remove(PlantType* plant) override;
     
     /**
      * @brief Gets all plants in this bundle
      * 
      * @return Vector of plant pointers in this bundle
      */
-    std::vector<PlantType*> getChildren();
-    virtual void fertilize()override;
-    virtual void grow()override;
-    virtual void giveAttention()override;
-    virtual void water()override;
-    virtual void sunlight()override;
+    std::vector<PlantType*> getChildren() override;
 };
 #endif

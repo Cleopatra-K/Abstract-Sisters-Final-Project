@@ -51,7 +51,7 @@ class PlantType{
         int days;
         std::string uniqueID;
         std::string season;
-        // std::string colour;
+        std::string colour;
 
     protected:
         // Plant care methods, for template
@@ -67,8 +67,6 @@ class PlantType{
 
         PlantType(){};
 
-        PlantType(const std::string& n, double p, const std::string& desc);
-
         /**
          * @brief Constructs a PlantType with initial properties and color
          * 
@@ -77,8 +75,11 @@ class PlantType{
          * @param desc The description of the plant
          * @param colourType Initial color type for the plant
          */
-        PlantType(const std::string& n, double p, const std::string& desc, const std::string& colourType, const std::string season);
+        PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season);
 
+
+        PlantType(const PlantType& other);
+        
         /**
          * @brief Virtual destructor for proper cleanup
          */
@@ -129,7 +130,7 @@ class PlantType{
         void setUniqueID(const std::string& id);
         std::string getSeason() const;
         void setSeason(const std::string& s);
-        // std::string getStateAsString() ;
+        std::string getStateAsString() const;
 
          /**
          * @brief Retrieves the current color of the plant

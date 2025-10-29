@@ -15,9 +15,10 @@ Possible subtypes (categories) of plant factories.
  */
 class Indoor: public PlantType {
 public:
-    Indoor(const std::string& n, double p, const std::string& desc, std::string &colourType, std::string season);
+    Indoor();
+    Indoor(const std::string& n, double p, const std::string& desc, std::string &colourType, const std::string season);
     virtual PlantType* clone() const override = 0;
-    std::string getCategory() const override;
-    void display() const override;
+    std::string getCategory() const override=0;
+    void display() const override=0;
 };
 #endif

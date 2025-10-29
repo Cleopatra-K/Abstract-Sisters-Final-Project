@@ -35,7 +35,7 @@ public:
      * @param desc Description of the tree characteristics
      * @param colourType Initial color implementation type (e.g., "red", "green", "yellow")
      */
-    BonsaiTree(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season);
+    BonsaiTree(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season);
 
     /**
      * @brief Creates a deep copy of the Rose object
@@ -49,6 +49,15 @@ public:
     void display() const override;
 
 protected:
+
+    // Template method
+    // Primitive operations inherited from abstract class in template
+    virtual void fertilize() override;
+    virtual void grow() override;
+    virtual void giveAttention() override;
+    virtual void removeWeed() override;
+    virtual void water() override;
+    virtual void sunlight() override;
 
     /**
      * @brief Adds a plant to the bundle (non-owning reference)
@@ -69,13 +78,6 @@ protected:
      * 
      * @return Vector of plant pointers in this bundle
      */
-    std::vector<PlantType*> getChildren();
-
-    // Template method
-    virtual void fertilize()override;
-    virtual void grow()override;
-    virtual void giveAttention()override;
-    virtual void water()override;
-    virtual void sunlight()override;
+    std::vector<PlantType*> getChildren() ;
 };
 #endif

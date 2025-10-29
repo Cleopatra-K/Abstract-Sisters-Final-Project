@@ -36,7 +36,7 @@ public:
      * @param desc Description of the rose characteristics
      * @param colourType Initial color implementation type (e.g., "red", "green", "yellow")
      */
-    Rose(const std::string &n, double p, const std::string &desc, std::string &colourType, std::string season);
+    Rose(const std::string &n, double p, const std::string &desc, std::string &colourType, const std::string season);
 
     /**
      * @brief Creates a deep copy of the Rose object
@@ -80,11 +80,5 @@ public:
      * @return Vector of plant pointers in this bundle
      */
     std::vector<PlantType*> getChildren();
-    virtual void fertilize() override;
-    virtual void grow()override;
-    virtual void giveAttention()override;
-    virtual void removeWeed()override;
-    virtual void water()override;
-    virtual void sunlight()override;
 };
 #endif

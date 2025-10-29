@@ -53,7 +53,7 @@ public:
      * 
      * @return Subtotal before any discounts
      */
-    double calculateSubtotal() const;
+    double calculateSubtotal();
         
     /**
      * @brief Gets all items in the cart
@@ -74,7 +74,7 @@ public:
      * 
      * @return Number of items
      */
-    size_t getItemCount() const;
+    size_t getItemCount();
     
 
     /**
