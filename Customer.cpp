@@ -15,7 +15,8 @@ Customer::~Customer() {
     if (!ownedPlants.empty()) {
         returnPlantsToInventory();
     }
-    delete cart;
+    if(cart)
+        delete cart;
 }
 
 ShoppingCart* Customer::getCart() {
@@ -60,7 +61,7 @@ void Customer::purchaseCart() {
         ownedPlants.clear(); //Customer keeps ownership until system disposal
         cart->clear();
         
-        std::cout << "Purchase completed! Final price: $" << finalPrice << std::endl;
+        std::cout << "Purchase completed! Final price: R" << finalPrice << std::endl;
     } else {
         std::cout << "Cart is empty. Nothing to purchase." << std::endl;
     }
@@ -82,6 +83,6 @@ std::string Customer::getName(){
     return name;
 }
 
-void receiveMessage(const std::string& message){
-    (void)message;
+void Customer::receiveMessage(const std::string& message) {
+    std::cout << "Customer received message: " << message << std::endl;
 }

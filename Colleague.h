@@ -13,7 +13,7 @@ protected:
     Mediator* mediator;
     std::string name;
 public:
-    Colleague();
+    Colleague(){};
     Colleague(Mediator* med, const std::string& n): mediator(med), name(n) {}
     virtual ~Colleague();
 

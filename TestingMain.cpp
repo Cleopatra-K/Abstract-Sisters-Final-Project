@@ -11,16 +11,24 @@
 #include "BonsaiTree.h"
 #include "Mangrove.h"
 #include "Jacka.h"
+#include "Customer.h"
+#include "ShoppingCart.h"
+#include "DiscountStrategy.h"
+#include "BulkDiscount.h"
+#include "SeasonalDiscount.h"
+#include "WitheringDiscount.h"
+#include "GreenHouse.h"
 
 void testFactoryMethodPattern();
 void testBridgePattern();
 void testAllConcretePlants();
 void testEdgeCases();
+void testStrategyPattern();
 
 int main() {
     std::cout << "╔══════════════════════════════════════════════════╗\n";
     std::cout << "║           COMPREHENSIVE PLANT TEST SUITE         ║\n";
-    std::cout << "║        Testing Factory Method + Bridge          ║\n";
+    std::cout << "║   Factory Method + Bridge + Strategy Patterns   ║\n";
     std::cout << "╚══════════════════════════════════════════════════╝\n\n";
 
     // Test 1: Factory Method Pattern
@@ -32,7 +40,10 @@ int main() {
     // Test 3: All Concrete Plant Types
     testAllConcretePlants();
     
-    // Test 4: Edge Cases
+    // Test 4: Strategy Pattern (Discounts)
+    testStrategyPattern();
+    
+    // Test 5: Edge Cases
     testEdgeCases();
 
     std::cout << "\n╔══════════════════════════════════════════════════╗\n";
@@ -200,8 +211,181 @@ void testAllConcretePlants() {
     allPlants.clear();
 }
 
+void testStrategyPattern() {
+    std::cout << "\n\n💰 TEST 4: STRATEGY PATTERN (DISCOUNT STRATEGIES)\n";
+    std::cout << "=================================================\n";
+    
+    FlowerFactory flowerFactory;
+    TreeFactory treeFactory;
+    Customer customer;
+    
+    // Create test plants with different characteristics for discount testing
+    std::vector<PlantType*> testPlants;
+    
+    // Plants in different seasons for seasonal discount testing
+    std::string spring = "Spring";
+    std::string summer = "Summer";
+    std::string autumn = "Autumn";
+    
+    PlantType* springRose = flowerFactory.createRose(25.0);
+    springRose->setSeason(spring);
+    testPlants.push_back(springRose);
+    
+    PlantType* summerLily = flowerFactory.createPeaceLily(30.0);
+    summerLily->setSeason(summer);
+    testPlants.push_back(summerLily);
+    
+    PlantType* autumnBonsai = treeFactory.createBonsai(80.0);
+    autumnBonsai->setSeason(autumn);
+    testPlants.push_back(autumnBonsai);
+    
+    PlantType* regularRose = flowerFactory.createRose(20.0);
+    testPlants.push_back(regularRose);
+    
+    PlantType* expensiveBonsai = treeFactory.createBonsai(120.0);
+    testPlants.push_back(expensiveBonsai);
+
+    // Test 1: No Discount Strategy (Default Behavior)
+    std::cout << "\n--- Test 1: No Discount Strategy (Default Behavior) ---\n";
+    customer.addToCart(testPlants[0]);
+    customer.addToCart(testPlants[1]);
+    
+    std::cout << "Cart contents:\n";
+    std::vector<PlantType*> cartItems = customer.getCart()->getItems();
+    for (size_t i = 0; i < cartItems.size(); i++) {
+        std::cout << " - " << cartItems[i]->getName() << " | R" << cartItems[i]->getPrice() 
+                  << " | Season: " << cartItems[i]->getSeason() << "\n";
+    }
+    
+    double subtotal = customer.getCart()->calculateSubtotal();
+    std::cout << "Subtotal: R" << subtotal << "\n";
+    std::cout << "Final price (no discount): R" << customer.getCart()->applyDiscount() << "\n";
+    
+    customer.clearCart();
+
+    // Test 2: Bulk Discount Strategy
+    std::cout << "\n--- Test 2: Bulk Discount Strategy ---\n";
+    BulkDiscount* bulkDiscount = new BulkDiscount(3, 0.15); // 15% off for 3+ items
+    
+    customer.getCart()->setDiscountStrategy(bulkDiscount);
+    
+    // Add multiple items to trigger bulk discount
+    customer.addToCart(testPlants[0]);
+    customer.addToCart(testPlants[1]);
+    customer.addToCart(testPlants[2]);
+    customer.addToCart(testPlants[3]);
+    
+    std::cout << "Cart items: " << customer.getCart()->getItemCount() << "\n";
+    std::cout << "Discount applied: " << bulkDiscount->getDescription() << "\n";
+    std::cout << "Subtotal: R" << customer.getCart()->calculateSubtotal() << "\n";
+    std::cout << "Final price after bulk discount: R" << customer.getCart()->applyDiscount() << "\n";
+    
+    customer.clearCart();
+
+    // Test 3: Seasonal Discount Strategy
+    std::cout << "\n--- Test 3: Seasonal Discount Strategy ---\n";
+    SeasonalDiscount* seasonalDiscount = new SeasonalDiscount(spring, 0.20); // 20% off spring plants
+    
+    customer.getCart()->setDiscountStrategy(seasonalDiscount);
+    
+    // Add plants with different seasons
+    customer.addToCart(testPlants[0]); // Spring plant
+    customer.addToCart(testPlants[1]); // Summer plant (no discount)
+    customer.addToCart(testPlants[4]); // No season set (no discount)
+    
+    std::cout << "Discount applied: " << seasonalDiscount->getDescription() << "\n";
+    std::cout << "Subtotal: R" << customer.getCart()->calculateSubtotal() << "\n";
+    std::cout << "Final price after seasonal discount: R" << customer.getCart()->applyDiscount() << "\n";
+    
+    customer.clearCart();
+
+    // Test 4: Withering Discount Strategy
+    std::cout << "\n--- Test 4: Withering Discount Strategy ---\n";
+    WitheringDiscount* witheringDiscount = new WitheringDiscount(0.25); // 25% off withering plants
+    
+    customer.getCart()->setDiscountStrategy(witheringDiscount);
+    
+    // Note: For this test to work properly, you'd need plants in withering state
+    // For demonstration, we'll use regular plants and show the structure
+    customer.addToCart(testPlants[0]);
+    customer.addToCart(testPlants[1]);
+    customer.addToCart(testPlants[2]);
+    
+    std::cout << "Discount applied: " << witheringDiscount->getDescription() << "\n";
+    std::cout << "Subtotal: R" << customer.getCart()->calculateSubtotal() << "\n";
+    std::cout << "Final price after withering discount: R" << customer.getCart()->applyDiscount() << "\n";
+    std::cout << "Note: Withering discount only applies to plants in 'Withering' state\n";
+    
+    customer.clearCart();
+
+    // Test 5: Strategy Switching at Runtime (GoF Principle)
+    std::cout << "\n--- Test 5: Runtime Strategy Switching (GoF Principle) ---\n";
+    
+    // Start with bulk discount
+    customer.getCart()->setDiscountStrategy(new BulkDiscount(2, 0.10));
+    customer.addToCart(testPlants[0]);
+    customer.addToCart(testPlants[1]);
+    
+    std::cout << "Initial strategy: Bulk Discount\n";
+    std::cout << "Price with bulk discount: R" << customer.getCart()->applyDiscount() << "\n";
+    
+    // Switch to seasonal discount at runtime
+    customer.getCart()->setDiscountStrategy(new SeasonalDiscount(summer, 0.15));
+    std::cout << "Switched to: Seasonal Discount\n";
+    std::cout << "Price with seasonal discount: R" << customer.getCart()->applyDiscount() << "\n";
+    
+    // Switch back to no strategy
+    customer.getCart()->setDiscountStrategy(nullptr);
+    std::cout << "Switched to: No Discount Strategy\n";
+    std::cout << "Price with no discount: R" << customer.getCart()->applyDiscount() << "\n";
+    
+    customer.clearCart();
+
+    std::cout << "\n--- Test 6: Complete Purchase Flow ---\n";
+    GreenHouse* greenhouse = GreenHouse::getInstance();
+
+    // RESET the greenhouse for a clean test
+    std::vector<PlantType*> oldInventory = greenhouse->getInventory();
+    for (PlantType* plant : oldInventory) {
+        greenhouse->removeFromInventory(plant);
+        delete plant;
+    }
+
+    // Create and add fresh plants
+    PlantType* testRose = flowerFactory.createRose(25.0);
+    PlantType* testLily = flowerFactory.createPeaceLily(30.0); 
+    PlantType* testBonsai = treeFactory.createBonsai(80.0);
+
+    greenhouse->addToInventory(testRose);
+    greenhouse->addToInventory(testLily);
+    greenhouse->addToInventory(testBonsai);
+
+    std::vector<PlantType*> availablePlants = greenhouse->getInventory();
+    BulkDiscount* anotherBulkDiscount = new BulkDiscount(2, 0.10);
+
+    if (availablePlants.size() >= 3) {
+        customer.getCart()->setDiscountStrategy(anotherBulkDiscount);
+        customer.addToCart(availablePlants[0]);
+        customer.addToCart(availablePlants[1]); 
+        customer.addToCart(availablePlants[2]);
+        
+        std::cout << "Cart before purchase:\n";
+        std::vector<PlantType*> cartItems = customer.getCart()->getItems();
+        for (size_t i = 0; i < cartItems.size(); i++) {
+            std::cout << " - " << cartItems[i]->getName() << " | R" << cartItems[i]->getPrice() << "\n";
+        }
+
+        std::cout << "Applying discount: " << anotherBulkDiscount->getDescription() << "\n";
+        std::cout << "Final amount: R" << customer.getCart()->applyDiscount() << "\n";
+        
+        customer.purchaseCart();  // ONE purchase only
+    }
+
+    // Don't cleanup testPlants here - they were either purchased or still in greenhouse
+}
+
 void testEdgeCases() {
-    std::cout << "\n\n⚠️  TEST 4: EDGE CASES\n";
+    std::cout << "\n\n⚠️  TEST 5: EDGE CASES\n";
     std::cout << "=====================\n";
     
     FlowerFactory flowerFactory;
