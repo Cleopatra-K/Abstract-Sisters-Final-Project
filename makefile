@@ -23,7 +23,7 @@ COV_TARGET = plant_system_cov
 
 # List of all C++ source files required for the Plant Factory System
 # REMOVED: Outdoor.cpp Indoor.cpp Aquatic.cpp (abstract classes)
-SRCS = main.cpp FlowerFactory.cpp TreeFactory.cpp \
+SRCS = TestingMain.cpp FlowerFactory.cpp TreeFactory.cpp \
 	Rose.cpp Jacka.cpp PeaceLily.cpp BonsaiTree.cpp WaterLily.cpp Mangrove.cpp \
 	PlantType.cpp \
 	ColourImplementation.cpp Red.cpp Green.cpp Yellow.cpp \
