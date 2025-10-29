@@ -28,7 +28,7 @@ coverage: clean
 
 # Clean rule
 clean:
-	rm -f $(OBJS) $(TARGET) *.cpp *.gcda *.gcno *.gcov coverage.info 
+	rm -f $(OBJS) $(TARGET) *.gcda *.gcno *.gcov coverage.info 
 	rm -rf out
 
 valgrind: $(TARGET)
