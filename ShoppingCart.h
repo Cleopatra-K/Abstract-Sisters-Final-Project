@@ -39,7 +39,7 @@ public:
     /**
      * @brief Executes the discount strategy algorithm, this is like the execute()
      */
-    double applyDiscount();
+    double applyDiscount(double subtotal);
 
     /**
      * @brief Sets the discount strategy dynamically
@@ -53,28 +53,28 @@ public:
      * 
      * @return Subtotal before any discounts
      */
-    double calculateSubtotal();
+    double calculateSubtotal() const;
         
     /**
      * @brief Gets all items in the cart
      * 
      * @return Vector of plants in cart
      */
-    std::vector<PlantType*> getItems();
+    std::vector<PlantType*> getItems() const;
     
     /**
      * @brief Checks if cart is empty
      * 
      * @return true if cart is empty, false otherwise
      */
-    bool isEmpty();
+    bool isEmpty() const;
     
     /**
      * @brief Gets number of items in cart
      * 
      * @return Number of items
      */
-    size_t getItemCount();
+    size_t getItemCount() const;
     
 
     /**

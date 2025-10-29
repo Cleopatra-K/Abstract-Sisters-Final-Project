@@ -10,7 +10,7 @@ class GreenHouseStaff;
 
 class Command {
 public:
-    virtual ~Command() = default;
+    virtual ~Command(){};
     virtual void execute() = 0;
 };
 
