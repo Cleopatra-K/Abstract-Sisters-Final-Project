@@ -16,11 +16,11 @@ std::string Rose::getCategory() const {
 }
 
 void Rose::add(PlantType* plant){
-
+    (void)plant; // Unused - Rose is a leaf in Composite pattern
 }
 
 void Rose::remove(PlantType* plant){
-
+    (void)plant; // Unused - Rose is a leaf in Composite pattern
 }
 
 std::vector<PlantType*> Rose::getChildren(){

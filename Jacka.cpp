@@ -62,11 +62,11 @@ void Jacka::sunlight() {
 }
 
 void Jacka::add(PlantType* plant){
-
+    (void)plant; // Unused - Jacka is a leaf in Composite pattern
 }
 
 void Jacka::remove(PlantType* plant){
-
+    (void)plant; // Unused - Jacka is a leaf in Composite pattern
 }
 
 std::vector<PlantType*> Jacka::getChildren(){

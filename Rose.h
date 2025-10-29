@@ -53,32 +53,32 @@ public:
 
     // Template method
     // Primitive operations inherited from abstract class in template
-    virtual void fertilize();
-    virtual void grow();
-    virtual void giveAttention();
-    virtual void removeWeed();
-    virtual void water();
-    virtual void sunlight();
+    void fertilize() override;
+    void grow() override;
+    void giveAttention() override;
+    void removeWeed() override;
+    void water() override;
+    void sunlight() override;
 
     /**
      * @brief Adds a plant to the bundle (non-owning reference)
      * 
      * @param plant Plant to add (Customer maintains ownership)
      */
-    void add(PlantType* plant);
+    void add(PlantType* plant) override;
     
     /**
      * @brief Removes a plant from the bundle
      * 
      * @param plant Plant to remove (Customer still owns the plant)
      */
-    void remove(PlantType* plant);
+    void remove(PlantType* plant) override;
     
     /**
      * @brief Gets all plants in this bundle
      * 
      * @return Vector of plant pointers in this bundle
      */
-    std::vector<PlantType*> getChildren();
+    std::vector<PlantType*> getChildren() override;
 };
 #endif

@@ -1,22 +1,18 @@
 #include "WaterLily.h"
 
-WaterLily::WaterLily(const std::string &n, double p, const std::string &desc, std::string &colourType, std::string season):Aquatic(n, p, desc, colourType, season){
-
-}
+WaterLily::WaterLily() : Aquatic("Water Lily", 35.0, "Floating aquatic plant with beautiful flowers") {}
 
 void WaterLily::add(PlantType* plant){
-
+    (void)plant; // Unused - WaterLily is a leaf in Composite pattern
 }
 
 void WaterLily::remove(PlantType* plant){
-
+    (void)plant; // Unused - WaterLily is a leaf in Composite pattern
 }
 
 std::vector<PlantType*> WaterLily::getChildren(){
     return std::vector<PlantType*>();
 }
-
-WaterLily::WaterLily() : Aquatic("Water Lily", 35.0, "Floating aquatic plant with beautiful flowers") {}
 
 WaterLily::WaterLily(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) 
     : Aquatic(n, p, desc, colourType) {
