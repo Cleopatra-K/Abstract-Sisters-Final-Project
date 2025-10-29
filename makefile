@@ -132,7 +132,7 @@ clean:
 	@echo "Cleaning build artifacts..."
 	rm -f $(OBJS) $(ASAN_OBJS) $(COV_OBJS)
 	rm -f $(MAIN_TARGET) $(ASAN_TARGET) $(COV_TARGET)
-	rm -f *.gcno *.gcda coverage.info *.gcov
+	rm -f *.gcno *.gcda coverage.info *.gcov *.asan.o
 	rm -rf coverage_html
 
 # --- Create submission package ---
