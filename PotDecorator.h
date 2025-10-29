@@ -11,7 +11,7 @@ public:
     void display() const override {
         if (decoratedPlant) {
             decoratedPlant->display();
-            std::cout << " + Placed in a stylish pot!" << std::endl;
+            std::cout << "\033[35m" << " + Placed in a stylish pot!" << "\033[0m" << std::endl;
         }
     }
 
@@ -26,3 +26,4 @@ public:
 };
 
 #endif
+
