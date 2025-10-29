@@ -6,6 +6,8 @@
 #ifndef JACKA_H
 #define JACKA_H
 #include "Outdoor.h"
+#include <iostream>
+
 
 /**
  * @class Jacka
@@ -42,6 +44,9 @@ public:
      */
     PlantType* clone() const override;
 
+    std::string getCategory() const override;
+    void display() const override;
+
 protected:    
 
     // Template method
@@ -53,10 +58,6 @@ protected:
     virtual void water();
     virtual void sunlight();
 
-   
-    
 
-
-    
 };
 #endif

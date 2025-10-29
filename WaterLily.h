@@ -6,6 +6,8 @@
 #ifndef WATERLILY_H
 #define WATERLILY_H
 #include "Aquatic.h"
+#include <iostream>
+
 
 /**
  * @class WaterLily
@@ -42,6 +44,9 @@ public:
      */
     PlantType* clone() const override;
 
+    std::string getCategory() const override;
+    void display() const override;
+
 
 protected:
 
@@ -50,6 +55,29 @@ protected:
     virtual void fertilize();
     virtual void grow();
     virtual void giveAttention();
+    virtual void removeWeed();
+    virtual void water();
     virtual void sunlight();
+
+    /**
+     * @brief Adds a plant to the bundle (non-owning reference)
+     * 
+     * @param plant Plant to add (Customer maintains ownership)
+     */
+    void add(PlantType* plant);
+    
+    /**
+     * @brief Removes a plant from the bundle
+     * 
+     * @param plant Plant to remove (Customer still owns the plant)
+     */
+    void remove(PlantType* plant);
+    
+    /**
+     * @brief Gets all plants in this bundle
+     * 
+     * @return Vector of plant pointers in this bundle
+     */
+    std::vector<PlantType*> getChildren();
 };
 #endif
