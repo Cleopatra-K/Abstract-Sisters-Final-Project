@@ -16,7 +16,7 @@ PlantType* FlowerFactory::createPlant(double price) const {
 }
 
 PlantType* FlowerFactory::createRose(double price) const {
-    std::string colourType = "red";
+    std::string colourType = "green";
     std::string name = "Rose";
     std::string season = "Spring";
     std::string desc = "Beautiful flowering plant with thorns";
@@ -26,7 +26,7 @@ PlantType* FlowerFactory::createRose(double price) const {
 }
 
 PlantType* FlowerFactory::createPeaceLily(double price) const {
-    std::string colourType = "white";
+    std::string colourType = "green";
     std::string name = "Peace Lily";
     std::string season = "Summer";
     std::string desc = "Elegant indoor plant with white flowers";
@@ -36,7 +36,7 @@ PlantType* FlowerFactory::createPeaceLily(double price) const {
 }
 
 PlantType* FlowerFactory::createWaterLily(double price) const {
-    std::string colourType = "pink";
+    std::string colourType = "green";
     std::string name = "Water Lily";
     std::string season = "Summer";
     std::string desc = "Beautiful floating aquatic plant";

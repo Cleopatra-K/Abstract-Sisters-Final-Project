@@ -36,7 +36,7 @@ PlantType* TreeFactory::createMangrove(double price) const {
 }
 
 PlantType* TreeFactory::createJacarandaTree(double price) const {
-    std::string colourType = "purple";
+    std::string colourType = "green";
     std::string name = "Jacaranda";
     std::string desc = "Stunning purple-flowering tree";
     std::string season = "Summer";
