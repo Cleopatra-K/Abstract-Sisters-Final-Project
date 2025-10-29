@@ -15,6 +15,7 @@ void BonsaiTree::remove(PlantType* plant){
 std::vector<PlantType*> BonsaiTree::getChildren(){
     return std::vector<PlantType*>();
 }
+
 BonsaiTree::BonsaiTree() : Indoor("Bonsai Tree", 60.0, "Miniature cultivated tree") {}
 
 BonsaiTree::BonsaiTree(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) 

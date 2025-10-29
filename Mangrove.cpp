@@ -14,6 +14,8 @@ void Mangrove::remove(PlantType* plant){
 
 std::vector<PlantType*> Mangrove::getChildren(){
     return std::vector<PlantType*>();
+}
+
 Mangrove::Mangrove() : Aquatic("Mangrove", 55.0, "Coastal tree that grows in saltwater") {}
 
 Mangrove::Mangrove(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) 
