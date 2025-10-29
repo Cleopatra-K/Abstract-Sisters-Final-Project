@@ -1,41 +1,36 @@
-/**
- * @file PlantDecorator.h
- * @author Jessica Marodi
- * @brief Abstract decorator base class for plant decorations
- */
-
 #ifndef PLANTDECORATOR_H
 #define PLANTDECORATOR_H
 
 #include "PlantType.h"
+#include <iostream>
 
-/**
- * @class PlantDecorator
- * @brief Abstract decorator base class for plant decorations
- * 
- * This class serves as the base decorator in the Decorator pattern,
- * wrapping a PlantType component to add additional functionality.
- */
-class PlantDecorator : public PlantType{
+class PlantDecorator {
 protected:
-    PlantType* plant;
+    PlantType* decoratedPlant;  // Aggregation (not ownership)
 
 public:
-    /**
-     * @brief Constructor
-     * @param plant The PlantType component to be decorated
-     */
-    PlantDecorator(PlantType* comp) : plant(comp){}
+    // The decorator does not own the plant — it just references it
+    PlantDecorator(PlantType* plant) : decoratedPlant(plant) {}
 
-    /**
-     * @brief Virtual destructor
-     */
-    virtual ~PlantDecorator();
+    virtual ~PlantDecorator() {}  // No deletion here, since it doesn't own the object
 
-    /**
-     * @brief Pure virtual operation to be implemented by concrete decorators
-     */
-    virtual void decorate();
+    virtual void display() const {
+        if (decoratedPlant)
+            decoratedPlant->display();
+    }
+
+    virtual void careForPlant() {
+        if (decoratedPlant)
+            decoratedPlant->careForPlant();
+    }
+
+    virtual double getPrice() const {
+        return decoratedPlant ? decoratedPlant->getPrice() : 0.0;
+    }
+
+    virtual std::string getDescription() const {
+        return decoratedPlant ? decoratedPlant->getDescription() : "";
+    }
 };
 
-#endif // PLANTDECORATOR_H
+#endif

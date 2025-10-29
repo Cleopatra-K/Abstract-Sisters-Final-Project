@@ -1,26 +1,29 @@
-#ifndef SPECIALARRANGEMENT_H
-#define SPECIALARRANGEMENT_H
-#include "PlantDecorator.h"
+#ifndef SPECIALARRANGEMENTDECORATOR_H
+#define SPECIALARRANGEMENTDECORATOR_H
 
-/*
-Adds a decorative pot to a plant.
-*/
-class SpecialArrangement : public PlantDecorator{
- /**
-     * @brief Performs the gift wrap operation
-     * Adds pot decorator functionality to the base plant operation
-     */
-    void decorate() override;
-        /**
-     * @brief Destructor
-     */
-    ~SpecialArrangement() override{}
-     /**
-     * @brief Constructor
-     * @param plant The PlantType component to be arranged specially
-     */
-    SpecialArrangement(PlantType* plant);
-    std::string message;
+#include "PlantDecorator.h"
+#include <iostream>
+
+class SpecialArrangementDecorator : public PlantDecorator {
+public:
+    SpecialArrangementDecorator(PlantType* plant) : PlantDecorator(plant) {}
+
+    void display() const override {
+        if (decoratedPlant) {
+            decoratedPlant->display();
+            std::cout << " + Arranged specially for the occasion!" << std::endl;
+        }
+    }
+
+    double orginalPrice = this->getPrice();
+    double getPrice() const override {
+        return decoratedPlant ? decoratedPlant->getPrice() + 30.0 : orginalPrice;
+    }
+
+    std::string orginalDescription = this->getDescription();
+    std::string getDescription() const override {
+        return decoratedPlant ? decoratedPlant->getDescription() + " (Special Arrangement)" : "Basic";
+    }
 };
 
-#endif //SPECIALARRANGEMENT_H
+#endif

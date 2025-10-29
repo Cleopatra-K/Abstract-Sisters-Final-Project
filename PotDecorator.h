@@ -1,16 +1,28 @@
 #ifndef POTDECORATOR_H
 #define POTDECORATOR_H
+
 #include "PlantDecorator.h"
-#include "PotDecorator.h"
-/*
-Adds a decorative pot to a plant.
-*/
-class PotDecorator : public PlantDecorator{
- /**
-     * @brief Performs the gift wrap operation
-     * Adds pot decorator functionality to the base plant operation
-     */
-    void decorate() override;
+#include <iostream>
+
+class PotDecorator : public PlantDecorator {
+public:
+    PotDecorator(PlantType* plant) : PlantDecorator(plant) {}
+
+    void display() const override {
+        if (decoratedPlant) {
+            decoratedPlant->display();
+            std::cout << " + Placed in a stylish pot!" << std::endl;
+        }
+    }
+
+    double orginalPrice = this->getPrice();
+    double getPrice() const override {
+        return decoratedPlant ? decoratedPlant->getPrice() + 30.0 : orginalPrice;
+    }
+
+    std::string getDescription() const override {
+        return decoratedPlant ? decoratedPlant->getDescription() + " in Pot" : "No Pot";
+    }
 };
 
-#endif //POTDECORATOR_H
+#endif
