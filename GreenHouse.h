@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> dev
 // #ifndef GREENHOUSE_H
 // #define GREENHOUSE_H
 
@@ -165,10 +170,50 @@
 
 // #endif // GREENHOUSE_H
 
+<<<<<<< HEAD
+=======
+>>>>>>> Iterator
+>>>>>>> dev
 #ifndef GREENHOUSE_H
 #define GREENHOUSE_H
 
 #include <vector>
+<<<<<<< HEAD
+#include <string>
+#include <iostream>
+=======
+<<<<<<< HEAD
+#include "PlantType.h"
+>>>>>>> dev
+#include "Aggregate.h"
+#include "Iterator.h"
+#include "PlantType.h"
+#include "PlantIterator.h"
+
+/**
+ * @class GreenHouse
+ * @brief Singleton class managing plant inventory.
+ *
+ * GreenHouse ensures only one instance exists and provides centralized 
+ * management of plant inventory. Implements the Aggregate interface 
+ * to allow creation of iterators for traversing the inventory.
+ */
+class GreenHouse : public Aggregate {
+private:
+    std::vector<PlantType*> inventory;   ///< Collection of plants in the greenhouse
+    static GreenHouse* instance;         ///< Singleton instance
+
+    /**
+<<<<<<< HEAD
+     * @brief Private constructor to prevent direct instantiation.
+     *
+     * Ensures only a single instance exists via getInstance().
+=======
+     * @brief Private constructor to prevent external instantiation
+     * 
+     * The constructor is private to enforce the Singleton pattern and ensure
+     * that only one instance of GreenHouse can be created through getInstance().
+=======
 #include <string>
 #include <iostream>
 #include "Aggregate.h"
@@ -193,15 +238,30 @@ private:
      * @brief Private constructor to prevent direct instantiation.
      *
      * Ensures only a single instance exists via getInstance().
+>>>>>>> Iterator
+>>>>>>> dev
      */
     GreenHouse() = default;
 
 public:
     /**
+<<<<<<< HEAD
      * @brief Returns the singleton instance of GreenHouse.
      * @return Pointer to the GreenHouse instance.
      *
      * Implements lazy initialization. Note: not thread-safe.
+=======
+<<<<<<< HEAD
+     * @brief Gets the singleton instance of GreenHouse
+     * 
+     * Implements lazy initialization - the instance is created on first call.
+     * This method provides global access to the single GreenHouse instance.
+     * 
+     * @return Pointer to the singleton GreenHouse instance
+     * 
+     * @note This method is not thread-safe. In multithreaded environments,
+     *       additional synchronization mechanisms would be required.
+>>>>>>> dev
      */
     static GreenHouse* getInstance();
 
@@ -265,5 +325,81 @@ public:
     }
 };
 
+<<<<<<< HEAD
 #endif // GREENHOUSE_H
 
+=======
+#endif
+=======
+     * @brief Returns the singleton instance of GreenHouse.
+     * @return Pointer to the GreenHouse instance.
+     *
+     * Implements lazy initialization. Note: not thread-safe.
+     */
+    static GreenHouse* getInstance();
+
+    // Prevent copying and assignment
+    GreenHouse(const GreenHouse&) = delete;
+    GreenHouse& operator=(const GreenHouse&) = delete;
+
+    /// Destructor
+    virtual ~GreenHouse() = default;
+
+    /**
+     * @brief Adds a plant to the inventory.
+     * @param plant Pointer to the plant to add.
+     */
+    void addToInventory(PlantType* plant);
+
+    /**
+     * @brief Removes a plant from the inventory.
+     * @param plant Pointer to the plant to remove.
+     */
+    void removeFromInventory(PlantType* plant);
+
+    /**
+     * @brief Returns a copy of the current inventory.
+     * @return Vector of PlantType pointers.
+     */
+    std::vector<PlantType*> getInventory();
+
+    /**
+     * @brief Checks if a plant is available in the inventory.
+     * @param plant Pointer to the plant to check.
+     * @return true if the plant is in the inventory, false otherwise.
+     */
+    bool isPlantAvailable(PlantType* plant);
+
+    /**
+     * @class GreenHouseIterator
+     * @brief Iterator for traversing greenhouse inventory.
+     */
+    class GreenHouseIterator : public Iterator {
+    private:
+        std::vector<PlantType*>& plants; ///< Reference to inventory
+        size_t index;                    ///< Current position in iteration
+
+    public:
+        explicit GreenHouseIterator(std::vector<PlantType*>& p)
+            : plants(p), index(0) {}
+
+        bool hasNext() const override { return index < plants.size(); }
+
+        // PlantType* next() override {
+        //     return hasNext() ? plants[index++] : nullptr;
+        // }
+    };
+
+    /**
+     * @brief Creates an iterator for the inventory.
+     * @return Pointer to a new GreenHouseIterator instance.
+     */
+    Iterator* createIterator() override {
+        return new PlantIterator(inventory);
+    }
+};
+
+#endif // GREENHOUSE_H
+
+>>>>>>> Iterator
+>>>>>>> dev
