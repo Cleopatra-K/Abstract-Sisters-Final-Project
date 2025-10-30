@@ -9,8 +9,8 @@ public:
     SpecialArrangementDecorator(PlantType* plant) : PlantDecorator(plant) {}
 
     void decorate() const override {
-        if (decoratedPlant) {
-            decoratedPlant->decorate();
+        if (this->decoratedPlant) {
+            this->decoratedPlant->decorate();
             std::cout << "\033[32m"; 
             std::cout << " + Arranged specially for the occasion!" << std::endl;
             std::cout << "Adding special arrangement: ceramic pot, ribbon, and personalized card." << std::endl;
@@ -27,14 +27,15 @@ public:
 
     double orginalPrice = this->getPrice();
     double getPrice() const override {
-        return decoratedPlant ? decoratedPlant->getPrice() + 30.0 : orginalPrice;
+        return this->decoratedPlant ? this->decoratedPlant->getPrice() + 30.0 : orginalPrice;
     }
 
     std::string orginalDescription = this->getDescription();
     std::string getDescription() const override {
-        return decoratedPlant ? decoratedPlant->getDescription() + " (Special Arrangement)" : "Basic";
+        return this->decoratedPlant ? this->decoratedPlant->getDescription() + " (Special Arrangement)" : "Basic";
     }
 };
 
 #endif
+
 
