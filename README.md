@@ -108,5 +108,6 @@ Abstract Sisters – COS214 2025
 Department of Computer Science, University of Pretoria
 
 <p align="center">
-  <img src="docs/TransparentLogo.png" alt="Pretoria Blooms Co. Logo" width="200" style="margin-bottom: 20px;">
+  <img src="docs/TransparentLogo.png" alt="Pretoria Blooms Co. Logo" width="400" style="margin-bottom: 20px;">
 </p>
+
