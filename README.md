@@ -1,12 +1,16 @@
 # Pretoria Blooms Co. - Plant Nursery Management System
 
-**Team Name:** Abstract Sister Final Project  
-**Course:** COS214 – Design Patterns Project  
-**Institution:** University of Pretoria  
-**Semester:** 2025  
+![Pretoria Blooms Co. Logo](docs/TransparentLogo.png)
 
-A sophisticated C++ console application simulating a complete plant nursery e-commerce system.  
-Developed to demonstrate advanced software design principles and the practical application of multiple design patterns.
+
+**Team Name:** Abstract Sisters Final Project  
+**Course:** COS214 – Design Patterns Project  
+**Institution:** University of Pretoria    
+
+**Pretoria Blooms Co.** is a C++ based **e-commerce system** that simulates a functional plant nursery.  
+Users can browse, customize, and purchase a variety of **flowers and trees**, manage their shopping cart, and create bundles or arrangements.  
+The system is designed to showcase **software design principles** and the practical application of multiple **design patterns**.
+
 
 ---
 
@@ -51,6 +55,7 @@ This system integrates **13 Gang of Four (GoF) design patterns** to achieve modu
 
 All files are located in the **root directory**, with a dedicated **`/docs`** folder containing the final report and UML diagrams.
 
+\`\`\`text
 / (root)
 │
 ├── README.md                # Project documentation
@@ -60,9 +65,9 @@ All files are located in the **root directory**, with a dedicated **`/docs`** fo
 │
 └── /docs                    # Documentation and report files
     └── COS214_Final_Report.pdf
+\`\`\`
 
-
-## 🚀 Compilation and Execution
+## Compilation and Execution
 
 ### Prerequisites
 - **C++ compiler** with C++11 support (g++ recommended)
@@ -80,7 +85,9 @@ make
 ```
 
 ### Running the Application
+```bash
 ./nursery
+```
 
 ### Maintenance Commands
 ```bash 
@@ -98,5 +105,5 @@ make valgrind
 7. Bundle Creation: Uses the Composite pattern to create bouquets and arrangements dynamically.
 
 #### Development Team
-Abstract Sister Team – COS214 2025
+Abstract Sisters – COS214 2025
 Department of Computer Science, University of Pretoria
