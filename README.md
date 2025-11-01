@@ -1,7 +1,5 @@
 # Pretoria Blooms Co. - Plant Nursery Management System
 
-![Pretoria Blooms Co. Logo](docs/TransparentLogo.png)
-
 
 **Team Name:** Abstract Sisters Final Project  
 **Course:** COS214 – Design Patterns Project  
@@ -16,7 +14,7 @@ The system is designed to showcase **software design principles** and the practi
 
 ## Project Overview
 
-**Pretoria Blooms Co.** is a fully featured plant nursery management system that handles:  
+**Pretoria Blooms Co.** is a featured plant nursery management system that handles:  
 - **Plant inventory management** with complete life cycle tracking  
 - **Customer purchasing workflows** with shopping cart and bundle functionality  
 - **Staff coordination** between greenhouse and sales operations  
@@ -55,7 +53,7 @@ This system integrates **13 Gang of Four (GoF) design patterns** to achieve modu
 
 All files are located in the **root directory**, with a dedicated **`/docs`** folder containing the final report and UML diagrams.
 
-\`\`\`text
+```
 / (root)
 │
 ├── README.md                # Project documentation
@@ -64,8 +62,9 @@ All files are located in the **root directory**, with a dedicated **`/docs`** fo
 ├── *.cpp / *.h              # All source and header files
 │
 └── /docs                    # Documentation and report files
-    └── COS214_Final_Report.pdf
-\`\`\`
+    ├── COS214_Final_Report.pdf
+    └──TransparentLogo.png
+```
 
 ## Compilation and Execution
 
@@ -107,3 +106,7 @@ make valgrind
 #### Development Team
 Abstract Sisters – COS214 2025
 Department of Computer Science, University of Pretoria
+
+<p align="center">
+  <img src="docs/TransparentLogo.png" alt="Pretoria Blooms Co. Logo" width="200" style="margin-bottom: 20px;">
+</p>
