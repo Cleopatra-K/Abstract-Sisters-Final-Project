@@ -7,6 +7,8 @@ Base interface for mediators. Defines communication between components.
 
 #include <string>
 
+
+
 class Colleague;
 
 class Mediator {

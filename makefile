@@ -8,7 +8,8 @@ CXXFLAGS = -std=c++11 -Wall
 COVFLAGS = --coverage -O0 
 
 # Source files
-SRCS = TestingMain.cpp \
+SRCS = main.cpp\
+		TUI.cpp \
        InteractionMediator.cpp \
        InventoryMediator.cpp \
 	   Blooming.cpp \

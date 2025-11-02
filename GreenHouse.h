@@ -14,7 +14,7 @@ private:
 public:
     GreenHouse() {}
     // GreenHouse owns plants
-  ~GreenHouse() {
+    ~GreenHouse() {
         clearInventory();
     }
 

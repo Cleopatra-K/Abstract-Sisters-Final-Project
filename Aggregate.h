@@ -1,7 +1,7 @@
 #ifndef AGGREGATE_H
 #define AGGREGATE_H
 
-#include "Iterator.h"
+class Iterator;
 
 class Aggregate {
 public:
