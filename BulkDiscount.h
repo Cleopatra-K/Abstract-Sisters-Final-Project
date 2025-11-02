@@ -42,14 +42,14 @@ public:
      * @param cart The shopping cart to evaluate for bulk discount
      * @return Discounted price if conditions met, original price otherwise
      */
-    double applyDiscount(ShoppingCart* cart);
+    double applyDiscount(ShoppingCart* cart) override;
     
     /**
      * @brief Gets description of the bulk discount
      * 
      * @return String describing the bulk discount conditions
      */
-    std::string getDescription();
+    std::string getDescription() override;
     
     /**
      * @brief Gets the minimum item count required for discount

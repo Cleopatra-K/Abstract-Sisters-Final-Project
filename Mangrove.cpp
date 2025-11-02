@@ -1,11 +1,10 @@
 #include "Mangrove.h"
 
-//Mangrove::Mangrove() : Aquatic("Mangrove", 55.0, "Coastal tree that grows in saltwater") {}
+Mangrove::Mangrove() : Aquatic() {}
 
-Mangrove::Mangrove(const std::string &n, double p, const std::string &desc, std::string &colourType, const std::string season):Aquatic(n, p, desc, colourType, season){
-
-}
-
+Mangrove::Mangrove(const std::string& n, double p, const std::string& desc,
+                   const std::string& colourType, const std::string& season)
+    : Aquatic(n, p, desc, colourType, season) {}
 
 PlantType* Mangrove::clone() const {
     return new Mangrove(*this);
@@ -22,17 +21,6 @@ void Mangrove::display() const {
         << " | " << getDescription() << std::endl;
 }
 
-void Mangrove::add(PlantType* plant){
-    (void)plant;
-}
-
-void Mangrove::remove(PlantType* plant){
-    (void)plant;
-}
-
-std::vector<PlantType*> Mangrove::getChildren(){
-    return std::vector<PlantType*>();
-}
 
 void Mangrove::fertilize() { 
     std::cout << "Fertilizing mangrove" << std::endl;
@@ -74,3 +62,13 @@ void Mangrove::sunlight() {
     setHealth(currentHealth + 5);
     if (getHealth() > 100) setHealth(100);
 }
+
+// Iterator (leaf: single element)
+Iterator* Mangrove::createIterator() {
+    std::vector<PlantType*> selfVector = { this };
+    return new BreadthFirstIterator(selfVector);
+}
+
+void Mangrove::add(PlantType* /*plant*/) {}
+void Mangrove::remove(PlantType* /*plant*/) {}
+std::vector<PlantType*> Mangrove::getChildren() { return {}; }

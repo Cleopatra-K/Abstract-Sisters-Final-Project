@@ -1,8 +1,10 @@
 #include "Jacka.h"
 
-//Jacka::Jacka() : Outdoor("Jacaranda Tree", 45.0, "Beautiful purple flowering tree") {}
+Jacka::Jacka() : Outdoor() {}
 
-Jacka::Jacka(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season) : Outdoor(n, p, desc, colourType, season) {}
+Jacka::Jacka(const std::string& n, double p, const std::string& desc,
+             const std::string& colourType, const std::string& season)
+    : Outdoor(n, p, desc, colourType, season) {}
 
 PlantType* Jacka::clone() const {
     return new Jacka(*this);
@@ -17,18 +19,6 @@ void Jacka::display() const {
         << " | Season: " << getSeason()
         << " | State: " << getStateAsString()
         << " | " << getDescription() << std::endl;
-}
-
-void Jacka::add(PlantType* plant){
-    (void)plant;
-}
-
-void Jacka::remove(PlantType* plant){
-    (void)plant;
-}
-
-std::vector<PlantType*> Jacka::getChildren(){
-    return std::vector<PlantType*>();
 }
 
 void Jacka::fertilize() { 
@@ -72,5 +62,13 @@ void Jacka::sunlight() {
     if (getHealth() > 100) setHealth(100);
 }
 
+// Iterator (leaf: single element)
+Iterator* Jacka::createIterator() {
+    std::vector<PlantType*> selfVector = { this };
+    return new BreadthFirstIterator(selfVector);
+}
 
 
+void Jacka::add(PlantType* /*plant*/) {}
+void Jacka::remove(PlantType* /*plant*/) {}
+std::vector<PlantType*> Jacka::getChildren() { return {}; }

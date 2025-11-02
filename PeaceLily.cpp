@@ -1,23 +1,12 @@
 #include "PeaceLily.h"
 
 //PeaceLily::PeaceLily() : Indoor("Peace Lily", 30.0, "Elegant indoor plant with white flowers") {}
+PeaceLily::PeaceLily() : Indoor() {}
 
+PeaceLily::PeaceLily(const std::string& n, double p, const std::string& desc,
+                     const std::string& colourType, const std::string& season)
+    : Indoor(n, p, desc, colourType, season) {}
 
-PeaceLily::PeaceLily(const std::string &n, double p, const std::string &desc, std::string &colourType, const std::string season):Indoor(n, p, desc, colourType, season){
-
-}
-
-void PeaceLily::add(PlantType* plant){
-    (void)plant;
-}
-
-void PeaceLily::remove(PlantType* plant){
-    (void)plant;
-}
-
-std::vector<PlantType*> PeaceLily::getChildren(){
-    return std::vector<PlantType*>();
-}
 
 PlantType* PeaceLily::clone() const {
     return new PeaceLily(*this);
@@ -74,3 +63,13 @@ void PeaceLily::sunlight() {
     setHealth(currentHealth + 5);
     if (getHealth() > 100) setHealth(100);
 }
+
+// Iterator (leaf: single element)
+Iterator* PeaceLily::createIterator() {
+    std::vector<PlantType*> selfVector = { this };
+    return new BreadthFirstIterator(selfVector);
+}
+
+void PeaceLily::add(PlantType* /*plant*/) {}
+void PeaceLily::remove(PlantType* /*plant*/) {}
+std::vector<PlantType*> PeaceLily::getChildren() { return {}; }

@@ -3,33 +3,56 @@
 
 #include "PlantType.h"
 #include <iostream>
+#include <vector>
 
-class PlantDecorator {
+class PlantDecorator : public PlantType {
 protected:
-    PlantType* decoratedPlant;  // Aggregation (not ownership)
+    PlantType* decoratedPlant;  // Not owned — just referenced
 
 public:
-    // The decorator does not own the plant — it just references it
-    PlantDecorator(PlantType* plant) : decoratedPlant(plant) {}
+    // PlantDecorator(PlantType* plant) : decoratedPlant(plant) {}
+    PlantDecorator(PlantType* plant)
+        : PlantType(plant->getName(), plant->getPrice(), plant->getDescription(),
+                    plant->getColour(), plant->getSeason()),
+          decoratedPlant(plant) {}
+    virtual ~PlantDecorator() {}
 
-    virtual ~PlantDecorator() {}  // No deletion here, since it doesn't own the object
-
-    virtual void display() const {
+    // Forward core PlantType interface methods
+    void display() const override {
         if (decoratedPlant)
             decoratedPlant->display();
     }
 
-    virtual void careForPlant() {
+    void careForPlant() override {
         if (decoratedPlant)
             decoratedPlant->careForPlant();
     }
 
-    virtual double getPrice() const {
+    double getPrice() const override {
         return decoratedPlant ? decoratedPlant->getPrice() : 0.0;
     }
 
-    virtual std::string getDescription() const {
+    std::string getDescription() const override {
         return decoratedPlant ? decoratedPlant->getDescription() : "";
+    }
+
+    // Composite-related methods (usually no operations for decorators)
+    void add(PlantType* component) override {}
+    void remove(PlantType* component) override {}
+    std::vector<PlantType*> getChildren() override { return {}; }
+
+    // Iterator (decorator usually delegates)
+    Iterator* createIterator() override {
+        return decoratedPlant ? decoratedPlant->createIterator() : nullptr;
+    }
+
+    std::string getCategory() const override {
+        return decoratedPlant ? decoratedPlant->getCategory() + " + Decoration" : "Decoration";
+    }
+
+    PlantType* clone() const override {
+        // Shallow clone by default (override in subclasses for deep copy)
+        return new PlantDecorator(decoratedPlant);
     }
 };
 

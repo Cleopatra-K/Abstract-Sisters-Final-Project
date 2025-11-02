@@ -1,63 +1,90 @@
-/**
- * @file Bundle.h
- * @brief Composite class representing a bundle of plants
- */
-
 #ifndef BUNDLE_H
 #define BUNDLE_H
 
 #include "PlantType.h"
+#include "BreadthFirstIterator.h"
 #include <vector>
+#include <string>
+#include <algorithm>
+#include <iostream>
 
-/**
- * @class Bundle
- * @brief Composite in Composite pattern - represents a bundle of plants
- * 
- * A Bundle can contain individual plants (Leaf) or other bundles (Composite),
- * allowing hierarchical structures of plant collections. The ShoppingCart
- * can treat Bundles and individual plants uniformly through the PlantType interface.
- * 
- * @note Uses non-owning pointers - Customer owns all plants
- */
 class Bundle : public PlantType {
 private:
-    std::vector<PlantType*> plants;  ///< Non-owning plant pointers
-    std::string name;
+    std::vector<PlantType*> plants;
 
 public:
-    /**
-     * @brief Constructs a Bundle with a name
-     * 
-     * @param bundleName Name of the bundle
-     */
-    Bundle(std::string& bundleName);
-    
-    /**
-     * @brief Destructor - does NOT delete plants (Customer owns them)
-     */
-    ~Bundle();
-    
-    // Composite Pattern Methods
-    /**
-     * @brief Adds a plant to the bundle (non-owning reference)
-     * 
-     * @param plant Plant to add (Customer maintains ownership)
-     */
-    void add(PlantType* plant);
-    
-    /**
-     * @brief Removes a plant from the bundle
-     * 
-     * @param plant Plant to remove (Customer still owns the plant)
-     */
-    void remove(PlantType* plant);
-    
-    /**
-     * @brief Gets all plants in this bundle
-     * 
-     * @return Vector of plant pointers in this bundle
-     */
-    std::vector<PlantType*> getChildren();
+    // Constructors
+    Bundle() {}
+    Bundle(const std::string& bundleName)
+        : PlantType(bundleName, 0.0, "Bundle container", "", "") {}
+
+    // Destructor: delete all cloned plants
+    ~Bundle() override {
+        for (PlantType* p : plants)
+            delete p;
+        plants.clear();
+    }
+
+    // No copy constructor or assignment operator: use clone() instead
+    Bundle(const Bundle&) = delete;
+    Bundle& operator=(const Bundle&) = delete;
+
+    // Add a plant: clones it for safe ownership
+    void add(PlantType* plant) override {
+        if (plant)
+            plants.push_back(plant->clone());
+    }
+
+    // Remove a plant by unique ID
+    void remove(PlantType* plant) override {
+        auto it = std::remove_if(plants.begin(), plants.end(),
+            [&](PlantType* p) {
+                return p->getUniqueID() == plant->getUniqueID();
+            });
+        for (auto itr = it; itr != plants.end(); ++itr)
+            delete *itr;
+        plants.erase(it, plants.end());
+    }
+
+    // Get all children
+    std::vector<PlantType*> getChildren() override {
+        return plants;
+    }
+
+    // Create a Breadth-First iterator
+    Iterator* createIterator() override {
+        return new BreadthFirstIterator(plants);
+    }
+
+    // Deep clone the bundle
+    PlantType* clone() const override {
+        Bundle* copy = new Bundle(getName());
+        for (auto* child : plants)
+            copy->add(child); // add() already clones
+        return copy;
+    }
+
+    // Category
+    std::string getCategory() const override { return "Bundle"; }
+
+    // Display
+    void display() const override {
+        std::cout << "Bundle: " << getName()
+                  << " contains " << plants.size() << " plants." << std::endl;
+    }
+
+    void printSize() const {
+        std::cout << "Bundle has " << plants.size() << " plants.\n";
+    }
+
+    // Template operations (do nothing for bundles)
+    void fertilize() override {}
+    void grow() override {}
+    void giveAttention() override {}
+    void removeWeed() override {}
+    void water() override {}
+    void sunlight() override {}
+    void careForPlant() override {}
 };
 
 #endif

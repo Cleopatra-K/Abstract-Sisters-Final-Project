@@ -3,10 +3,9 @@
 #include "Mangrove.h"
 #include "Jacka.h" 
 
-// Factory Method 1: Create default tree (BonsaiTree)
 PlantType* TreeFactory::createPlant() const {
-    std::cout << "TreeFactory: Creating default Bonsai Tree..." << std::endl;
-    return new BonsaiTree();  // Use default constructor
+    std::cout << "TreeFactory: No default plant created." << std::endl;
+    return nullptr;  
 }
 
 // Factory Method 2: Create default tree with custom price
@@ -36,7 +35,7 @@ PlantType* TreeFactory::createMangrove(double price) const {
 }
 
 PlantType* TreeFactory::createJacarandaTree(double price) const {
-    std::string colourType = "green";
+    std::string colourType = "purple";
     std::string name = "Jacaranda";
     std::string desc = "Stunning purple-flowering tree";
     std::string season = "Summer";

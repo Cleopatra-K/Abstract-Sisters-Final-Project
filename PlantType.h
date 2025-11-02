@@ -11,6 +11,7 @@
 //#include "PlantState.h"
 
 
+
 /**
  * @brief Participates in the following design patterns:
  * 1. Bridge - abstraction for the bridge design pattern
@@ -25,14 +26,15 @@
  * It knows its name, price, how healthy it is, and what stage it's in.
  */
 
+class Iterator;
 class ColourImplementation;
 class PlantState;
 class PlantType{
     private:
         static int nextID; 
 
-        ColourImplementation* colourImpl; ///< Pointer to the color implementation (Implementor in Bridge pattern)
-
+        ColourImplementation* colourImpl = nullptr; ///< Pointer to the color implementation (Implementor in Bridge pattern)
+        PlantState* currentState = nullptr;
         /**
          * @brief Factory method to create appropriate ColourImplementation
          * 
@@ -41,7 +43,6 @@ class PlantType{
          * @note This method encapsulates the creation logic, allowing the Abstraction to control which ConcreteImplementor is used
          */
         ColourImplementation* createColour(std::string colourType);
-        PlantState* currentState;
 
         // PlantType abstract base class
         std::string name;
@@ -65,6 +66,7 @@ class PlantType{
 
     public:
 
+        virtual Iterator* createIterator() = 0;
         PlantType(){};
 
         /**
@@ -75,10 +77,12 @@ class PlantType{
          * @param desc The description of the plant
          * @param colourType Initial color type for the plant
          */
-        PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season);
+        // PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season);
 
+        //KM
+        PlantType(const std::string& n, double p, const std::string& desc, const std::string& colourType, const std::string& season);
 
-        PlantType(const PlantType& other);
+        PlantType(const PlantType& other); //deep copy 
         
         /**
          * @brief Virtual destructor for proper cleanup
@@ -104,12 +108,7 @@ class PlantType{
         virtual std::string getCategory() const = 0;
         
         //template method
-        void careForPlant();
-
-        // Observer pattern methods (if needed)
-        // virtual void attach();
-        // virtual void detach();
-        // virtual void notify();
+        virtual void careForPlant(); // also allows polymorphic behavior if you have a PlantType* pointing to a Bundle or Leaf.
 
         /**
         * @brief Change the plant's growth stage (like from baby to teen)
@@ -120,8 +119,8 @@ class PlantType{
 
         // Getters and setters
         std::string getName() const;
-        double getPrice() const;
-        std::string getDescription() const;
+        virtual double getPrice() const;
+        virtual std::string getDescription() const;
         int getHealth() const;
         int getDays() const;
         void setHealth(int h);

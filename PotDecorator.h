@@ -2,26 +2,27 @@
 #define POTDECORATOR_H
 
 #include "PlantDecorator.h"
-#include <iostream>
 
 class PotDecorator : public PlantDecorator {
-public:
-    PotDecorator(PlantType* plant) : PlantDecorator(plant) {}
+private:
+    double potPrice;
 
-    void display() const override {
-        if (decoratedPlant) {
-            decoratedPlant->display();
-            std::cout << " + Placed in a stylish pot!" << std::endl;
-        }
-    }
+public:
+    PotDecorator(PlantType* plant, double price = 5.0)
+        : PlantDecorator(plant), potPrice(price) {}
 
     double getPrice() const override {
-        return decoratedPlant ? decoratedPlant->getPrice() + 30.0 : 30.0;
+        return decoratedPlant->getPrice() + potPrice;
     }
 
     std::string getDescription() const override {
-        return decoratedPlant ? decoratedPlant->getDescription() + " in Pot" : "Pot Decor";
+        return decoratedPlant->getDescription() + " + Pot";
+    }
+
+    PlantType* clone() const override {
+        return new PotDecorator(decoratedPlant->clone(), potPrice);
     }
 };
 
 #endif
+

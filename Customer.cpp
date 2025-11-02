@@ -1,42 +1,41 @@
-/**
- * @file Customer.cpp
- * @brief Customer class that owns and maintains ShoppingCart as Strategy Context
- */
-
 #include "Customer.h"
-#include "GreenHouse.h"
+#include <iostream>
 
-Customer::Customer() {
+Customer::Customer(Mediator* med, const std::string& n, GreenHouse* gh)
+    : Colleague(med, n), greenhouse(gh)
+{
     cart = new ShoppingCart();
 }
 
 Customer::~Customer() {
-    // If customer is destroyed without purchasing, return plants to inventory
     if (!ownedPlants.empty()) {
         returnPlantsToInventory();
     }
-    if(cart)
-        delete cart;
+    delete cart;
 }
 
-ShoppingCart* Customer::getCart() {
-    return cart;
-}
+ShoppingCart* Customer::getCart() { return cart; }
 
 void Customer::addToCart(PlantType* plant) {
-    GreenHouse::getInstance()->removeFromInventory(plant);
-    
-    ownedPlants.push_back(plant);
-    cart->addItem(plant);
+    if (greenhouse && greenhouse->isPlantAvailable(plant)) {
+        greenhouse->removeFromInventory(plant);
+        ownedPlants.push_back(plant);
+        cart->addItem(plant);
+        sendMessage("Added plant to cart.");  // <-- now works
+    } else {
+        std::cout << "Plant not available in inventory!" << std::endl;
+    }
 }
 
 void Customer::removeFromCart(PlantType* plant) {
     cart->removeItem(plant);
-    
     for (size_t i = 0; i < ownedPlants.size(); i++) {
         if (ownedPlants[i] == plant) {
-            GreenHouse::getInstance()->addToInventory(plant);
+            if (greenhouse) {
+                greenhouse->addToInventory(plant);
+            }
             ownedPlants.erase(ownedPlants.begin() + i);
+            sendMessage("Item removed successfully.");  // <-- works now
             break;
         }
     }
@@ -44,7 +43,6 @@ void Customer::removeFromCart(PlantType* plant) {
 
 void Customer::clearCart() {
     returnPlantsToInventory();
-    
     cart->clear();
 }
 
@@ -55,34 +53,36 @@ bool Customer::isCartEmpty() {
 void Customer::purchaseCart() {
     if (!cart->isEmpty()) {
         double finalPrice = cart->applyDiscount();
-        
         processPayment(finalPrice);
-        
-        ownedPlants.clear(); //Customer keeps ownership until system disposal
+        ownedPlants.clear();
         cart->clear();
-        
-        std::cout << "Purchase completed! Final price: R" << finalPrice << std::endl;
+        sendMessage("Purchase completed! Final price: R" + std::to_string(finalPrice));
     } else {
-        std::cout << "Cart is empty. Nothing to purchase." << std::endl;
+        sendMessage("Cart is empty. Nothing to purchase.");
     }
 }
 
 void Customer::returnPlantsToInventory() {
-    for (size_t i = 0; i < ownedPlants.size(); i++) {
-        GreenHouse::getInstance()->addToInventory(ownedPlants[i]);
+    if (!greenhouse) return;
+    for (auto* plant : ownedPlants) {
+        greenhouse->addToInventory(plant);
     }
     ownedPlants.clear();
 }
-
 
 void Customer::processPayment(double amount) {
     std::cout << "Processing payment of R" << amount << std::endl;
 }
 
-std::string Customer::getName(){
+std::string Customer::getName() {
     return name;
 }
 
 void Customer::receiveMessage(const std::string& message) {
     std::cout << "Customer received message: " << message << std::endl;
+}
+
+void Customer::displayCart() {
+    std::cout << "\nCustomer: " << getName() << std::endl;
+    cart->display();
 }

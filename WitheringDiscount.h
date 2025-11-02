@@ -39,14 +39,14 @@ public:
      * @param cart The shopping cart containing plants to evaluate
      * @return Discounted price after applying withering discounts
      */
-    double applyDiscount(ShoppingCart* cart);
+    double applyDiscount(ShoppingCart* cart) override;
     
     /**
      * @brief Gets description of the withering discount
      * 
      * @return String describing the withering discount conditions
      */
-    std::string getDescription();
+    std::string getDescription() override;
     
     /**
      * @brief Gets the discount percentage

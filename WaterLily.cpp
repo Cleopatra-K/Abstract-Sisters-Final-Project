@@ -1,23 +1,10 @@
 #include "WaterLily.h"
 
+WaterLily::WaterLily() : Aquatic() {}
 
-//WaterLily::WaterLily() : Aquatic("Water Lily", 35.0, "Floating aquatic plant with beautiful flowers") {}
-
-WaterLily::WaterLily(const std::string &n, double p, const std::string &desc, std::string &colourType, const std::string season):Aquatic(n, p, desc, colourType, season){
-
-}
-
-void WaterLily::add(PlantType* plant){
-    (void)plant;
-}
-
-void WaterLily::remove(PlantType* plant){
-    (void)plant;
-}
-
-std::vector<PlantType*> WaterLily::getChildren(){
-    return std::vector<PlantType*>();
-}
+WaterLily::WaterLily(const std::string& n, double p, const std::string& desc,
+                   const std::string& colourType, const std::string& season)
+    : Aquatic(n, p, desc, colourType, season) {}
 
 PlantType* WaterLily::clone() const {
     return new WaterLily(*this);
@@ -75,3 +62,12 @@ void WaterLily::sunlight() {
     if (getHealth() > 100) setHealth(100);
 }
 
+// Iterator (leaf: single element)
+Iterator* WaterLily::createIterator() {
+    std::vector<PlantType*> selfVector = { this };
+    return new BreadthFirstIterator(selfVector);
+}
+
+void WaterLily::add(PlantType* /*plant*/) {}
+void WaterLily::remove(PlantType* /*plant*/) {}
+std::vector<PlantType*> WaterLily::getChildren() { return {}; }

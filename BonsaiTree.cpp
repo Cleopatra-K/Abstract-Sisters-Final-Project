@@ -1,27 +1,14 @@
 #include "BonsaiTree.h"
 
-//BonsaiTree::BonsaiTree() : Indoor("Bonsai Tree", 60.0, "Miniature cultivated tree", "Green", "Autumn") {}
 
-BonsaiTree::BonsaiTree(){};
+BonsaiTree::BonsaiTree() : Indoor() {}
 
-BonsaiTree::BonsaiTree(const std::string &n, double p, const std::string &desc, std::string &colourType, std::string season):Indoor(n, p, desc, colourType, season){
-
-}
-
-void BonsaiTree::add(PlantType* plant){
-    (void)plant;
-}
-
-void BonsaiTree::remove(PlantType* plant){
-    (void)plant;
-}
-
-std::vector<PlantType*> BonsaiTree::getChildren(){
-    return std::vector<PlantType*>();
-}
+BonsaiTree::BonsaiTree(const std::string &n, double p, const std::string &desc,
+                       const std::string &colourType, const std::string &season)
+    : Indoor(n, p, desc, colourType, season) {}
 
 PlantType* BonsaiTree::clone() const {
-    return new BonsaiTree(*this);
+    return new BonsaiTree(*this); // OK, but caller must delete
 }
 
 std::string BonsaiTree::getCategory() const {
@@ -77,3 +64,12 @@ void BonsaiTree::sunlight() {
     if (getHealth() > 100) setHealth(100);
 }
 
+void BonsaiTree::add(PlantType* /*plant*/) {}
+void BonsaiTree::remove(PlantType* /*plant*/) {}
+std::vector<PlantType*> BonsaiTree::getChildren() { return {}; }
+
+// Iterator (leaf: single element)
+Iterator* BonsaiTree::createIterator() {
+    std::vector<PlantType*> selfVector = { this };
+    return new BreadthFirstIterator(selfVector);
+}

@@ -6,6 +6,7 @@
 #ifndef JACKA_H
 #define JACKA_H
 #include "Outdoor.h"
+#include "BreadthFirstIterator.h"
 #include <iostream>
 
 
@@ -25,7 +26,7 @@
 class Jacka: public Outdoor{
 public:
     Jacka();
-
+    
     /**
      * @brief Parameterized constructor for custom Rose properties
      * 
@@ -34,7 +35,9 @@ public:
      * @param desc Description of the tree characteristics
      * @param colourType Initial color implementation type (e.g., "red", "green", "yellow")
      */
-    Jacka(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season);
+    Jacka(const std::string& n, double p, const std::string& desc,
+          const std::string& colourType, const std::string& season);
+    ~Jacka() override {};
 
     /**
      * @brief Creates a deep copy of the Rose object
@@ -78,5 +81,8 @@ protected:
      * @return Vector of plant pointers in this bundle
      */
     std::vector<PlantType*> getChildren();
+
+    // Iterator (Leaf version)
+    Iterator* createIterator() override;
 };
 #endif

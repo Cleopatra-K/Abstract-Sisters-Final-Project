@@ -1,125 +1,67 @@
-
 #ifndef GREENHOUSE_H
 #define GREENHOUSE_H
 
-#include <vector>
-#include <string>
 #include <iostream>
-#include "Aggregate.h"
-#include "Iterator.h"
+#include <vector>
+#include <algorithm>
+#include <iomanip>
 #include "PlantType.h"
-#include "GreenHouseIterator.h"
 
-/**
- * @class GreenHouse
- * @brief Singleton class that manages plant inventory using the Singleton design pattern.
- *
- * The GreenHouse class ensures only one instance exists throughout the application
- * and provides centralized management of plant inventory.
- * Implements the Aggregate interface to allow creation of iterators for traversal.
- */
-class GreenHouse : public Aggregate {
+class GreenHouse {
 private:
-    std::vector<PlantType*> inventory;   ///< Collection of plants in the inventory
-    static GreenHouse* instance;         ///< Static instance for Singleton pattern
-
-    /**
-     * @brief Private constructor to prevent external instantiation.
-     *
-     * The constructor is private to enforce the Singleton pattern and ensure
-     * that only one instance of GreenHouse can be created through getInstance().
-     */
-    GreenHouse() = default;
+    std::vector<PlantType*> inventory;
 
 public:
-    /**
-     * @brief Gets the singleton instance of GreenHouse.
-     *
-     * Implements lazy initialization — the instance is created on first call.
-     * This method provides global access to the single GreenHouse instance.
-     *
-     * @return Pointer to the singleton GreenHouse instance.
-     *
-     * @note This method is not thread-safe. In multithreaded environments,
-     *       additional synchronization mechanisms would be required.
-     */
-    static GreenHouse* getInstance();
-
-    /// Deleted copy constructor to prevent copying.
-    GreenHouse(const GreenHouse&) = delete;
-
-    /// Deleted assignment operator to prevent assignment.
-    GreenHouse& operator=(const GreenHouse&) = delete;
-
-    /// Virtual destructor for proper cleanup.
-    virtual ~GreenHouse() = default;
-
-    /**
-     * @brief Adds a plant to the inventory.
-     *
-     * Stores a plant in the greenhouse inventory. The plant is added to the
-     * internal collection and becomes available for other operations.
-     *
-     * @param plant Pointer to the PlantType object to add to inventory.
-     *
-     * @pre plant != nullptr
-     * @post inventory.size() increases by 1
-     * @post plant is contained in the inventory
-     */
-    void addToInventory(PlantType* plant);
-
-    /**
-     * @brief Removes a plant from the inventory.
-     *
-     * Searches for and removes the specified plant from the inventory.
-     * If the plant is not found, no action is taken.
-     *
-     * @param plant Pointer to the PlantType object to remove from inventory.
-     *
-     * @pre plant != nullptr
-     * @post If plant was in inventory, inventory.size() decreases by 1
-     * @post plant is no longer contained in the inventory
-     */
-    void removeFromInventory(PlantType* plant);
-
-    /**
-     * @brief Gets the current inventory.
-     *
-     * Returns a copy of the current inventory vector. This provides read-only
-     * access to the inventory contents without exposing the internal storage.
-     *
-     * @return std::vector<PlantType*> containing all plants in inventory.
-     *
-     * @note The returned vector is a copy, so modifications to it won't affect
-     *       the actual inventory. Use add/remove methods to modify inventory.
-     */
-    std::vector<PlantType*> getInventory();
-
-    /**
-     * @brief Checks if a specific plant is available in inventory.
-     *
-     * Searches the inventory for the specified plant and returns whether
-     * it is currently available.
-     *
-     * @param plant Pointer to the PlantType object to search for.
-     * @return true if the plant is found in inventory, false otherwise.
-     *
-     * @pre plant != nullptr
-     */
-    bool isPlantAvailable(PlantType* plant);
-
-
-    /**
-     * @brief Creates a concrete iterator for the greenhouse inventory
-     * 
-     * This is the factory method that creates the appropriate iterator
-     * 
-     * @return Pointer to a new GreenHouseIterator instance
-     */
-    Iterator* createIterator() override {
-        return new GreenHouseIterator(inventory);
+    GreenHouse() {}
+    // GreenHouse owns plants
+  ~GreenHouse() {
+        clearInventory();
     }
-};   
+
+    void addToInventory(PlantType* plant) { inventory.push_back(plant); }
+
+    void removeFromInventory(PlantType* plant) {
+        inventory.erase(std::remove(inventory.begin(), inventory.end(), plant), inventory.end());
+    }
+
+    std::vector<PlantType*> getInventory() const { return inventory; }
+
+    bool isPlantAvailable(PlantType* plant) const {
+        return std::find(inventory.begin(), inventory.end(), plant) != inventory.end();
+    }
+
+    // void displayAll() const {
+    //     std::cout << "=== GreenHouse Plants ===" << std::endl;
+    //     for (auto p : inventory)
+    //         p->display();
+    // }
+
+      void displayAll() const {
+        if (inventory.empty()) {
+            std::cout << " The greenhouse is currently empty.\n";
+            return;
+        }
+
+        std::cout << "\n===  Pretoria Blooms Collection  ===\n";
+        std::cout << "----------------------------------------\n";
+        int index = 1;
+
+        for (auto p : inventory) {
+            std::cout << index++ << ". " << p->getName()
+                      << " | Price: R" << std::fixed << std::setprecision(2) << p->getPrice()
+                      << " | Season: " << p->getSeason()
+                      << " | Colour: " << p->getColour()
+                      << " | State: " << p->getStateAsString() << "\n";
+        }
+
+        std::cout << "----------------------------------------\n";
+    }
+
+    void clearInventory() {
+        for (auto* p : inventory)
+            delete p;
+        inventory.clear();
+    }
+};
 
 #endif
-

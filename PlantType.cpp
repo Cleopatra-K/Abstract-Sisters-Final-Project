@@ -19,11 +19,11 @@ int PlantType::nextID = 1000;
  * @note This implements the Bridge Pattern by delegating color behavior to separate objects
  */
 ColourImplementation* PlantType::createColour(std::string colourType){
-    if(colourType == "green")
+    if(colourType == "green" || colourType == "Green")
         return new Green();
-    else if(colourType == "yellow")
+    else if(colourType == "yellow" || colourType == "Yellow")
         return new Yellow();
-    else if(colourType == "red")
+    else if(colourType == "red" || colourType == "Red")
         return new Red();
     else
         return NULL;
@@ -55,37 +55,49 @@ bool PlantType::hasColour() const{
  * @param p The price of the plant  
  * @param desc The description of the plant
  */
-PlantType::PlantType(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season) : colourImpl(NULL), currentState(NULL),name(n), price(p),
-    description(desc),  health(100), days(0), season("Unknown"){
-    
 
-    // Your unique ID generation
+//KM
+PlantType::PlantType(const std::string& n, double p, const std::string& desc,
+                     const std::string& colourType, const std::string& season)
+    : colourImpl(NULL), currentState(NULL),
+      name(n), price(p), description(desc), health(100), days(0), season("Unknown") 
+{
+    // Unique ID generation
     std::stringstream ss;
     ss << PlantType::nextID++;
     uniqueID = ss.str();
 
-    // Your friend's color initialization
+    // Color initialization
     colourImpl = createColour(colourType);
+
+    // Set season
     this->season = season;
 
-    //currentState = new SeedlingState();
+    // currentState = new SeedlingState();
 }
 
-PlantType::PlantType(const PlantType& other): colourImpl(nullptr),
-        currentState(other.currentState),
-        name(other.name), 
-        price(other.price),
-        description(other.description),
-        health(other.health),
-        days(other.days),
-        uniqueID(other.uniqueID),
-        season(other.season)
-    {
-        // Deep copy of colourImpl
-        if (other.colourImpl) {
-            colourImpl = createColour(other.getColour());
-        }
-    }
+PlantType::PlantType(const PlantType& other)
+    : name(other.name),
+      price(other.price),
+      description(other.description),
+      health(other.health),
+      days(other.days),
+      uniqueID(other.uniqueID),
+      season(other.season),
+      colour(other.colour)
+{
+    // Deep copy of colourImpl
+    if (other.colourImpl)
+        colourImpl = other.colourImpl->clone();  // Assuming ColourImplementation has clone()
+    else
+        colourImpl = nullptr;
+
+    // Deep copy of currentState
+    if (other.currentState)
+        currentState = other.currentState->clone(); // Assuming PlantState has clone()
+    else
+        currentState = nullptr;
+}
 
 /**
  * @brief Destructor - cleans up color implementation
@@ -111,6 +123,12 @@ void PlantType::setColour(const std::string& colourType){
     }
     colourImpl = createColour(colourType);
 } 
+
+void PlantType::setState(PlantState* state) {
+    if (currentState)
+        delete currentState; // delete old state
+    currentState = state; // takes ownership
+}
 
 /**
  * @brief Enhanced display showing color information

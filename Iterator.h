@@ -5,9 +5,9 @@ Iterator interface defining methods like next() and hasNext().
 */
 
 #include "PlantType.h"
+
 class Iterator
 {
-
 public:
     virtual ~Iterator(){};
     virtual void first() = 0;

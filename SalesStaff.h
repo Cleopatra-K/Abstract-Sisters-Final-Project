@@ -10,14 +10,14 @@
 Concrete colleague representing a staff member who handles sales-related actions.
 They can send/receive messages via the Mediator and execute commands.
 */
-
 class SalesStaff : public Colleague {
 private:
-    Command* currentCommand; 
+    Command* currentCommand;
+    GreenHouse* greenhouse; // store pointer to greenhouse
 
 public:
-    SalesStaff(Mediator* med, const std::string& n)
-        : Colleague(med, n), currentCommand(nullptr) {}
+    SalesStaff(Mediator* med, const std::string& n, GreenHouse* gh)
+        : Colleague(med, n), currentCommand(nullptr), greenhouse(gh) {}
 
     ~SalesStaff() override = default;
 
@@ -46,13 +46,15 @@ public:
     }
 
     void checkPlantAvailability(PlantType* plant) {
-        GreenHouse* gh = GreenHouse::getInstance();
-        if (gh->isPlantAvailable(plant)) {
-            std::cout << name << ": Plant is available in inventory.\n";
-        } else {
-            std::cout << name << ": Plant not found in inventory.\n";
+        if (greenhouse) {
+            if (greenhouse->isPlantAvailable(plant)) {
+                std::cout << name << ": Plant is available in inventory.\n";
+            } else {
+                std::cout << name << ": Plant not found in inventory.\n";
+            }
         }
     }
 };
+
 
 #endif

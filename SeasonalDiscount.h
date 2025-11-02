@@ -43,7 +43,8 @@ public:
      * @param discount Percent discount (e.g., 0.15 for 15% off)
      * @param plantTypes Vector of plant types eligible for discount
      */
-    SeasonalDiscount(std::string& seasonName, double discount);
+
+    SeasonalDiscount(const std::string& season, double discount);
     
     /**
      * @brief Applies seasonal discount to eligible plants in the cart
@@ -54,14 +55,14 @@ public:
      * @param cart The shopping cart containing plants to evaluate
      * @return Discounted price after applying seasonal discount to eligible plants
      */
-    double applyDiscount(ShoppingCart* cart);
+    double applyDiscount(ShoppingCart* cart) override;
     
     /**
      * @brief Gets description of the seasonal discount
      * 
      * @return String describing the seasonal discount and eligible plants
      */
-    std::string getDescription();
+    std::string getDescription() override;
     
     /**
      * @brief Gets the season name

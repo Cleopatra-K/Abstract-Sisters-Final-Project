@@ -1,84 +1,49 @@
-/**
- * @file Rose.h
- * @brief Inherited from PlantType
- *
- */
 #ifndef ROSE_H
 #define ROSE_H
 
 #include <vector>
 #include <string>
 #include "Outdoor.h"
-#include <iostream>
-
-class PlantType;
+#include "BreadthFirstIterator.h"
 
 /**
  * @class Rose
- * @brief  A beautiful outdoor flower with thorns
- * This class participates in multiple design patterns:
- * 1. Bridge- RefinedAbstraction
- * 2. Composite - Leaf
- *
- * @ingroup Plants
- * @see PlantType, Outdoor, ColourImplementation
- * @author Cleopatra
+ * @brief A beautiful outdoor flower with thorns
+ * 
+ * Participates in:
+ * - Composite: Leaf
+ * - Prototype: clone()
  */
-class Rose : public Outdoor{
+class Rose : public Outdoor {
 public:
     Rose();
+    Rose(const std::string& n, double p, const std::string& desc,
+         const std::string& colourType, const std::string& season);
+    ~Rose() override {};
 
-    /**
-     * @brief Parameterized constructor for custom Rose properties
-     *
-     * @param n The name of the rose variety
-     * @param p The price of the rose
-     * @param desc Description of the rose characteristics
-     * @param colourType Initial color implementation type (e.g., "red", "green", "yellow")
-     */
-    Rose(const std::string &n, double p, const std::string &desc, std::string &colourType, const std::string season);
+    // Prototype
+    PlantType* clone() const override;
 
-    /**
-     * @brief Creates a deep copy of the Rose object
-     *
-     * Implements the Prototype pattern by providing cloning capability.
-     * @return Pointer to a new Rose object that is a copy of this one
-     */
-    PlantType *clone() const override;
-
+    // Composite Leaf
     std::string getCategory() const override;
     void display() const override;
 
-    protected:
+    // Iterator (Leaf version)
+    Iterator* createIterator() override;
 
-    // Template method
-    // Primitive operations inherited from abstract class in template
-    virtual void fertilize();
-    virtual void grow();
-    virtual void giveAttention();
-    virtual void removeWeed();
-    virtual void water();
-    virtual void sunlight();
+    // Composite leaf methods (no children)
+    void add(PlantType* plant) override;
+    void remove(PlantType* plant) override;
+    std::vector<PlantType*> getChildren() override;
 
-    /**
-     * @brief Adds a plant to the bundle (non-owning reference)
-     * 
-     * @param plant Plant to add (Customer maintains ownership)
-     */
-    void add(PlantType* plant);
-    
-    /**
-     * @brief Removes a plant from the bundle
-     * 
-     * @param plant Plant to remove (Customer still owns the plant)
-     */
-    void remove(PlantType* plant);
-    
-    /**
-     * @brief Gets all plants in this bundle
-     * 
-     * @return Vector of plant pointers in this bundle
-     */
-    std::vector<PlantType*> getChildren();
+protected:
+    // Template operations
+    void fertilize() override;
+    void grow() override;
+    void giveAttention() override;
+    void removeWeed() override;
+    void water() override;
+    void sunlight() override;
 };
+
 #endif

@@ -3,10 +3,11 @@
 #include "PlantType.h"
 #include <sstream>
 
-SeasonalDiscount::SeasonalDiscount(std::string& season, double discount){
+SeasonalDiscount::SeasonalDiscount(const std::string& season, double discount){
     currentSeason = season;
     discountPercentage = discount;
 }
+
 
 double SeasonalDiscount::applyDiscount(ShoppingCart* cart) {
     double subtotal = cart->calculateSubtotal();

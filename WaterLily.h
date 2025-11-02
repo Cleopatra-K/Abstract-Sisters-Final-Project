@@ -6,6 +6,7 @@
 #ifndef WATERLILY_H
 #define WATERLILY_H
 #include "Aquatic.h"
+#include "BreadthFirstIterator.h"
 #include <iostream>
 
 
@@ -25,6 +26,7 @@
 class WaterLily : public Aquatic{
 public:
     WaterLily();
+    ~WaterLily() override {};
 
     /**
      * @brief Parameterized constructor for custom Rose properties
@@ -34,14 +36,16 @@ public:
      * @param desc Description of the plant characteristics
      * @param colourType Initial color implementation type (e.g., "red", "green", "yellow")
      */
-    WaterLily(const std::string& n, double p, const std::string& desc, std::string& colourType, const std::string season);
-
+    WaterLily(const std::string& n, double p, const std::string& desc,
+             const std::string& colourType, const std::string& season);
     /**
      * @brief Creates a deep copy of the Rose object
      * 
      * Implements the Prototype pattern by providing cloning capability.
      * @return Pointer to a new Rose object that is a copy of this one
      */
+    
+    WaterLily(const WaterLily& other) : Aquatic(other) {}
     PlantType* clone() const override;
 
     std::string getCategory() const override;
@@ -79,5 +83,7 @@ protected:
      * @return Vector of plant pointers in this bundle
      */
     std::vector<PlantType*> getChildren() override;
+    // Iterator (Leaf version)
+    Iterator* createIterator() override;
 };
 #endif

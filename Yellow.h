@@ -3,8 +3,18 @@
 
 #include "ColourImplementation.h"
 
-class Yellow: public ColourImplementation{
-    public:
-        std::string fillColour();
+class Yellow : public ColourImplementation {
+public:
+    Yellow() {}
+    ~Yellow() override {}
+
+    std::string fillColour() override {
+        return "Yellow";
+    }
+
+    ColourImplementation* clone() const override {
+        return new Yellow(*this);
+    }
 };
+
 #endif

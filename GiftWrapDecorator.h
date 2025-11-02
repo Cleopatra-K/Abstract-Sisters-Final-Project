@@ -2,25 +2,25 @@
 #define GIFTWRAPDECORATOR_H
 
 #include "PlantDecorator.h"
-#include <iostream>
 
 class GiftWrapDecorator : public PlantDecorator {
-public:
-    GiftWrapDecorator(PlantType* plant) : PlantDecorator(plant) {}
+private:
+    double wrapPrice;
 
-    void display() const override {
-        if (decoratedPlant) {
-            decoratedPlant->display();
-            std::cout << " + Wrapped beautifully for gifting!" << std::endl;
-        }
-    }
+public:
+    GiftWrapDecorator(PlantType* plant, double price = 3.0)
+        : PlantDecorator(plant), wrapPrice(price) {}
 
     double getPrice() const override {
-        return decoratedPlant ? decoratedPlant->getPrice() + 10.0 : 10.0;
+        return decoratedPlant->getPrice() + wrapPrice;
     }
 
     std::string getDescription() const override {
-        return decoratedPlant ? decoratedPlant->getDescription() + " with Gift Wrap" : "Gift Wrap Decor";
+        return decoratedPlant->getDescription() + " + Gift Wrap";
+    }
+
+    PlantType* clone() const override {
+        return new GiftWrapDecorator(decoratedPlant->clone(), wrapPrice);
     }
 };
 

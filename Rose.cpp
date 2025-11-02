@@ -1,77 +1,68 @@
 #include "Rose.h"
+#include <iostream>
 
-//Rose::Rose() : Outdoor("Rose", 25.0, "Beautiful flower with thorns", "hello", "hello") {}
+Rose::Rose() : Outdoor() {}
 
-Rose::Rose(){}
+Rose::Rose(const std::string& n, double p, const std::string& desc,
+           const std::string& colourType, const std::string& season)
+    : Outdoor(n, p, desc, colourType, season) {}
 
-Rose::Rose(const std::string& n, double p, const std::string& desc, std::string& colourType, std::string season) : Outdoor(n, p, desc, colourType, season) {
-        //(void)season;
-}
-
+// Prototype
 PlantType* Rose::clone() const {
     return new Rose(*this);
 }
 
+// Composite Leaf
 std::string Rose::getCategory() const {
     return "Outdoor";
 }
 
-void Rose::add(PlantType* plant){
-    (void)plant;
-}
-
-void Rose::remove(PlantType* plant){
-    (void)plant;
-}
-
-std::vector<PlantType*> Rose::getChildren(){
-    return std::vector<PlantType*>();
-}
-
 void Rose::display() const {
-    std::cout << "Rose: " << getName() << " | Price: R" << getPrice() 
-        << " | Season: " << getSeason()
-        << " | State: " << getStateAsString()
-        << " | " << getDescription() << std::endl;
+    std::cout << "Rose: " << getName() << " | Price: R" << getPrice()
+              << " | Season: " << getSeason()
+              << " | State: " << getStateAsString()
+              << " | " << getDescription() << std::endl;
 }
 
-void Rose::fertilize() { 
+// Iterator (leaf: single element)
+Iterator* Rose::createIterator() {
+    std::vector<PlantType*> selfVector = { this };
+    return new BreadthFirstIterator(selfVector);
+}
+
+// Template operations
+void Rose::fertilize() {
     std::cout << "Fertilizing rose" << std::endl;
-    int currentHealth = getHealth();
-    setHealth(currentHealth + 5);
-    if (getHealth() > 100) setHealth(100);
+    setHealth(std::min(getHealth() + 5, 100));
 }
 
-void Rose::grow() { 
+void Rose::grow() {
     std::cout << "Rose growing" << std::endl;
-    int currentDays = getDays();
-    setDays(currentDays + 1);
+    setDays(getDays() + 1);
 }
 
-void Rose::giveAttention() { 
+void Rose::giveAttention() {
     std::cout << "Giving attention to rose" << std::endl;
-    int currentHealth = getHealth();
-    setHealth(currentHealth + 5);
-    if (getHealth() > 100) setHealth(100);
+    setHealth(std::min(getHealth() + 5, 100));
 }
 
-void Rose::removeWeed() { 
+void Rose::removeWeed() {
     std::cout << "Removing weeds around rose" << std::endl;
-    int currentHealth = getHealth();
-    setHealth(currentHealth + 5);
-    if (getHealth() > 100) setHealth(100);
+    setHealth(std::min(getHealth() + 5, 100));
 }
 
-void Rose::water() { 
+void Rose::water() {
     std::cout << "Watering rose" << std::endl;
-    int currentHealth = getHealth();
-    setHealth(currentHealth + 5);
-    if (getHealth() > 100) setHealth(100);
+    setHealth(std::min(getHealth() + 5, 100));
 }
 
-void Rose::sunlight() { 
+void Rose::sunlight() {
     std::cout << "Rose enjoying sunlight" << std::endl;
-    int currentHealth = getHealth();
-    setHealth(currentHealth + 5);
-    if (getHealth() > 100) setHealth(100);
+    setHealth(std::min(getHealth() + 5, 100));
 }
+
+//For Werror - —but it never actually uses those parameters (since a leaf has no children).
+
+void Rose::add(PlantType* /*plant*/) {}
+void Rose::remove(PlantType* /*plant*/) {}
+std::vector<PlantType*> Rose::getChildren() { return {}; }
