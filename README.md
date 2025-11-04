@@ -36,7 +36,6 @@ This system integrates **13 Gang of Four (GoF) design patterns** to achieve modu
 |  | **Mediator** | Coordinates communication between greenhouse staff and sales staff. |
 |  | **Template Method** | Defines plant care routines with flexible steps. |
 |  | **Command** | Encapsulates user actions such as purchasing, removing, or watering plants. |
-|  | **Chain of Responsibility** | Routes customer and staff requests to the appropriate handlers. |
 | **Creational** | **Abstract Factory** | Creates plant families (flowers, trees) for consistent production. |
 |  | **Prototype** | Clones existing plants for quick stock replenishment. |
 | **Structural** | **Composite** | Groups plants into bundles and bouquets for customer customization. |
@@ -110,5 +109,6 @@ Department of Computer Science, University of Pretoria
 <p align="center">
   <img src="docs/TransparentLogo.png" alt="Pretoria Blooms Co. Logo" width="250" style="margin-bottom: 20px;">
 </p>
+
 
 
